@@ -1,27 +1,31 @@
 import { HealthBar } from './HealthBar';
 import { GameObjects, Scene, Textures } from 'phaser'
-import gameSettings from '../gameSettings'
 
-type SpriteProps = {
-  scene: Scene
+export type SpriteConfig = {
   name: string
   x: number
   y: number
   texture: string | Textures.Texture
   frame: string
+  attackValue: number
+  healthValue: number
 }
 
 export class Sprite extends GameObjects.Sprite {
-  private maxHealth = 200
-  private health = 200
+  public attackValue = 0
+  public healthValue = 0
+  private maxHealth = 0
 
   healthBar: null | HealthBar = null
 
-  constructor(props: SpriteProps) {
-    const { scene, x, y, texture, frame, name } = props
+  constructor(scene: Scene, props: SpriteConfig) {
+    const { x, y, texture, frame, name, attackValue, healthValue } = props
     super(scene, x, y, texture, frame)
 
     this.name = name
+    this.attackValue = attackValue
+    this.healthValue = healthValue
+    this.maxHealth = healthValue
 
     this.init()
   }
@@ -45,17 +49,29 @@ export class Sprite extends GameObjects.Sprite {
   }
 
   hurt(damage: number) {
-    this.health -= damage
+    this.healthValue -= damage
 
-    const kProgressBar = this.health / this.maxHealth
+    this.setFrame('injured')
+
+    setTimeout(() => {
+      if (this.healthValue <= 0) return
+      this.setFrame('healthy')
+    }, 500)
+
+    const kProgressBar = this.healthValue / this.maxHealth
 
     if (this.healthBar) this.healthBar.change(kProgressBar)
 
-    if (this.health <= 0) this.kill()
+    if (this.healthValue <= 0) this.kill()
   }
 
   kill() {
     this.setFrame('dead')
     this.disableInteractive()
   } 
+
+  isAlive() {
+    if (this.healthValue > 0) return true
+    return false
+  }
 }

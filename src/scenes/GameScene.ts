@@ -1,9 +1,12 @@
 import { Scene } from 'phaser'
 import { Sprite } from '../prefabs/Sprite'
+import { monsterConfig } from '../characterConfigs/monsterConfig'
+import { magicianConfig } from '../characterConfigs/magicianConfig'
 import gameSettings from '../gameSettings'
 
 export class GameScene extends Scene {
-  private magician: null | Sprite = null
+  private heroes: Sprite[]  = []
+  private activeHeroIndex = 0
 
   constructor() {
     super('GameScene')
@@ -11,23 +14,13 @@ export class GameScene extends Scene {
 
   create() {
     this.createBg()
-    this.magician = new Sprite({
-      scene: this,
-      name: 'magician',
-      x: 300,
-      y: 550,
-      texture: 'magician',
-      frame: 'healthy'
-    })
 
-    new Sprite({
-      scene: this,
-      name: 'monster',
-      x: 550,
-      y: 540,
-      texture: 'monster',
-      frame: 'healthy'
-    }).flipX = true
+    const magician = new Sprite(this, magicianConfig)
+    const monster = new Sprite(this, monsterConfig)
+    monster.flipX = true
+
+    this.heroes.push(magician)
+    this.heroes.push(monster)
 
     this.initEvents()
   }
@@ -42,16 +35,32 @@ export class GameScene extends Scene {
     ).setOrigin(0)
   }
 
-  onClicked(_: unknown, attackedSprite: Sprite) {
-    if (attackedSprite.name === 'magician') return
-    if (!this.magician) return
+  turnHero() {
+    const hasNextHero = !!this.heroes[this.activeHeroIndex + 1]
+    if (!hasNextHero) {
+      this.activeHeroIndex = 0
+      return
+    }
+    this.activeHeroIndex += 1
+  }
 
-    this.magician.attack()
+  onAttackSprite(_: unknown, attackedSprite: Sprite) {
+    const attackingSprite = this.heroes[this.activeHeroIndex]
 
-    attackedSprite.hurt(20)
+    if (!attackingSprite.isAlive()) return
+    if (attackedSprite === attackingSprite) return
+    if (!attackingSprite) return
+    
+    const attackValue = attackingSprite.attackValue
+
+    attackingSprite.attack()
+
+    attackedSprite.hurt(attackValue)
+
+    this.turnHero()
   }
 
   initEvents() {
-    this.input.on('gameobjectdown', this.onClicked, this)
+    this.input.on('gameobjectdown', this.onAttackSprite, this)
   }
 }
