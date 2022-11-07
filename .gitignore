@@ -2,7 +2,17 @@
 /dist/*
 /build/
 .DS_Store
-/.idea/*
 package-lock.json
 .env
 .env-local
+.idea
+*.suo
+*.sublime-project
+*.sublime-workspace
+
+# Vendors
+node_modules/
+
+# Build
+dist/
+/npm-debug.log
