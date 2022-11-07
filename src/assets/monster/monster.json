@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "attack",
+	"frame": {"x":0,"y":0,"w":196,"h":179},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":196,"h":179},
+	"sourceSize": {"w":196,"h":179}
+},
+{
+	"filename": "healthy",
+	"frame": {"x":196,"y":0,"w":155,"h":208},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":155,"h":208},
+	"sourceSize": {"w":155,"h":208}
+},
+{
+	"filename": "dead",
+	"frame": {"x":0,"y":208,"w":223,"h":122},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":223,"h":122},
+	"sourceSize": {"w":223,"h":122}
+},
+{
+	"filename": "injured",
+	"frame": {"x":223,"y":208,"w":145,"h":156},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":145,"h":156},
+	"sourceSize": {"w":145,"h":156}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "monster.png",
+	"format": "RGBA8888",
+	"size": {"w":368,"h":364},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:8d3c4214880b8e1c0955ccf26c45fe67:de714d9cb78e0ff0aaefdd131950e69d:6ec6ef82eac74a14701d8066d2bc065f$"
+}
+}
