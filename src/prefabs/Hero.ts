@@ -12,7 +12,7 @@ export type SpriteConfig = {
   autoPlay?: boolean
 }
 
-export class Sprite extends GameObjects.Sprite {
+export class Hero extends GameObjects.Sprite {
   public attackValue = 0
   public healthValue = 0
   public autoPlay = false

@@ -1,12 +1,12 @@
 import { soldierConfig } from './../characterConfigs/soldierConfig';
 import { Scene } from 'phaser'
-import { Sprite } from '../prefabs/Sprite'
+import { Hero } from '../prefabs/Hero'
 import { monsterConfig } from '../characterConfigs/monsterConfig'
 import { magicianConfig } from '../characterConfigs/magicianConfig'
 import gameSettings from '../gameSettings'
 
 export class GameScene extends Scene {
-  private heroes: Sprite[]  = []
+  private heroes: Hero[]  = []
   private activeHeroIndex = 0
 
   constructor() {
@@ -16,11 +16,11 @@ export class GameScene extends Scene {
   create() {
     this.createBg()
 
-    const magician = new Sprite(this, magicianConfig)
-    const monster = new Sprite(this, monsterConfig)
+    const magician = new Hero(this, magicianConfig)
+    const monster = new Hero(this, monsterConfig)
     monster.flipX = true
 
-    const soldier = new Sprite(this, soldierConfig)
+    const soldier = new Hero(this, soldierConfig)
     soldier.flipX = true
 
     this.heroes.push(magician)
@@ -62,7 +62,7 @@ export class GameScene extends Scene {
     }, 1000)
   }
 
-  async attackSprite(attackedSprite: Sprite) {
+  async attackSprite(attackedSprite: Hero) {
     const attackingSprite = this.heroes[this.activeHeroIndex]
 
     if (!attackingSprite.isAlive()) return
@@ -78,7 +78,7 @@ export class GameScene extends Scene {
     this.turnHero()
   }
 
-  onClickSprite(_: unknown, attackedSprite: Sprite) {
+  onClickSprite(_: unknown, attackedSprite: Hero) {
     const isCurrentHeroAutoPlay = this.heroes[this.activeHeroIndex].autoPlay
 
     if (!attackedSprite.isAlive()) return

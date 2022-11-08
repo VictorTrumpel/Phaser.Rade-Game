@@ -1,4 +1,4 @@
-import { SpriteConfig } from '../prefabs/Sprite'
+import { SpriteConfig } from '../prefabs/Hero'
 
 export const monsterConfig: SpriteConfig = {
   name: 'monster',
