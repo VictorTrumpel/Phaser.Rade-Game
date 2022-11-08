@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "attack",
+	"frame": {"x":0,"y":0,"w":515,"h":330},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":515,"h":330},
+	"sourceSize": {"w":515,"h":330}
+},
+{
+	"filename": "healthy",
+	"frame": {"x":515,"y":0,"w":253,"h":286},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":253,"h":286},
+	"sourceSize": {"w":253,"h":286}
+},
+{
+	"filename": "dead",
+	"frame": {"x":0,"y":330,"w":290,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":290,"h":99},
+	"sourceSize": {"w":290,"h":99}
+},
+{
+	"filename": "injured",
+	"frame": {"x":290,"y":330,"w":283,"h":184},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":283,"h":184},
+	"sourceSize": {"w":283,"h":184}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "dragon.png",
+	"format": "RGBA8888",
+	"size": {"w":768,"h":514},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:0ea7bef33592f870ba48fe9af9e79c82:8e4655b87750edd50f84d426c9700060:581e962efa07d1f36d42214f5f5ec489$"
+}
+}

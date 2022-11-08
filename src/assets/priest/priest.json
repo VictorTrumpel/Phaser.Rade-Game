@@ -1,0 +1,52 @@
+{"frames": [
+
+{
+	"filename": "attack",
+	"frame": {"x":0,"y":396,"w":215,"h":204},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":215,"h":204},
+	"sourceSize": {"w":215,"h":204}
+},
+{
+	"filename": "heal",
+	"frame": {"x":96,"y":0,"w":118,"h":189},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":118,"h":189},
+	"sourceSize": {"w":118,"h":189}
+},
+{
+	"filename": "healthy",
+	"frame": {"x":0,"y":189,"w":136,"h":156},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":136,"h":156},
+	"sourceSize": {"w":136,"h":156}
+},
+{
+	"filename": "dead",
+	"frame": {"x":0,"y":345,"w":169,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":169,"h":51},
+	"sourceSize": {"w":169,"h":51}
+},
+{
+	"filename": "injured",
+	"frame": {"x":0,"y":0,"w":96,"h":167},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":167},
+	"sourceSize": {"w":96,"h":167}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "priest.png",
+	"format": "RGBA8888",
+	"size": {"w":215,"h":600},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:008243a495150a4013e29434d642731e:42753ca87dff10c6c68d7f02fe6a3497:510e67aafc202ff8ddf1a0c96da32509$"
+}
+}
