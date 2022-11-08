@@ -1,3 +1,4 @@
+import { soldierConfig } from './../characterConfigs/soldierConfig';
 import { Scene } from 'phaser'
 import { Sprite } from '../prefabs/Sprite'
 import { monsterConfig } from '../characterConfigs/monsterConfig'
@@ -19,8 +20,12 @@ export class GameScene extends Scene {
     const monster = new Sprite(this, monsterConfig)
     monster.flipX = true
 
+    const soldier = new Sprite(this, soldierConfig)
+    soldier.flipX = true
+
     this.heroes.push(magician)
     this.heroes.push(monster)
+    this.heroes.push(soldier)
 
     this.initEvents()
   }
@@ -36,15 +41,28 @@ export class GameScene extends Scene {
   }
 
   turnHero() {
-    const hasNextHero = !!this.heroes[this.activeHeroIndex + 1]
-    if (!hasNextHero) {
-      this.activeHeroIndex = 0
-      return
-    }
-    this.activeHeroIndex += 1
+    const alifeHeroes = this.heroes.filter(hero => hero.isAlive())
+
+    const nextHero = this.activeHeroIndex < alifeHeroes.length - 1
+      ? this.heroes.find((hero, heroIndex) => {
+        if (heroIndex <= this.activeHeroIndex || !hero.isAlive()) return false
+        return true
+      })
+      : this.heroes[0]
+    
+    if (!nextHero) return
+
+    this.activeHeroIndex = this.heroes.findIndex((hero) => hero === nextHero)
+ 
+    if (!nextHero.autoPlay) return
+
+    setTimeout(() => {
+      // пока задаю индекс 0, потом автоматический игрок будет выбирать цель "по-умному"
+      this.attackSprite(this.heroes[0])
+    }, 1000)
   }
 
-  onAttackSprite(_: unknown, attackedSprite: Sprite) {
+  async attackSprite(attackedSprite: Sprite) {
     const attackingSprite = this.heroes[this.activeHeroIndex]
 
     if (!attackingSprite.isAlive()) return
@@ -60,7 +78,15 @@ export class GameScene extends Scene {
     this.turnHero()
   }
 
+  onClickSprite(_: unknown, attackedSprite: Sprite) {
+    const isCurrentHeroAutoPlay = this.heroes[this.activeHeroIndex].autoPlay
+
+    if (!attackedSprite.isAlive()) return
+    if (isCurrentHeroAutoPlay) return
+    this.attackSprite(attackedSprite)
+  }
+
   initEvents() {
-    this.input.on('gameobjectdown', this.onAttackSprite, this)
+    this.input.on('gameobjectdown', this.onClickSprite, this)
   }
 }

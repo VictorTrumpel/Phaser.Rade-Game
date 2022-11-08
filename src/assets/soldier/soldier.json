@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "attack",
+	"frame": {"x":0,"y":237,"w":166,"h":153},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":166,"h":153},
+	"sourceSize": {"w":166,"h":153}
+},
+{
+	"filename": "healthy",
+	"frame": {"x":0,"y":0,"w":117,"h":167},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":117,"h":167},
+	"sourceSize": {"w":117,"h":167}
+},
+{
+	"filename": "dead",
+	"frame": {"x":0,"y":167,"w":128,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":70},
+	"sourceSize": {"w":128,"h":70}
+},
+{
+	"filename": "injured",
+	"frame": {"x":117,"y":0,"w":117,"h":146},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":117,"h":146},
+	"sourceSize": {"w":117,"h":146}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "soldier.png",
+	"format": "RGBA8888",
+	"size": {"w":234,"h":390},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:ed44cbd40ad910f1761fead17a68db30:b3116201e65a96ce56b8530b3a56cdb9:1365469667d93bb6b74b9d28a96b6600$"
+}
+}

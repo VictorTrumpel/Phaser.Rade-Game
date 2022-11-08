@@ -47,7 +47,7 @@ export class HealthBar {
     .fillRect(
       this.x, 
       this.y, 
-      this.style.width * k, 
+      this.style.width * (k < 0 ? 0 : k), 
       this.style.height
     )
   }

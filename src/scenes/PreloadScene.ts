@@ -7,6 +7,9 @@ import * as magicianMap from '../assets/magician/magic1.json'
 import monsterTexture from '../assets/monster/monster.png'
 import * as monsterMap from '../assets/monster/monster.json'
 
+import soldierTexture from '../assets/soldier/soldier.png'
+import * as soldierAtlas from '../assets/soldier/soldier.json'
+
 export class PreloadScene extends Scene {
   constructor() {
     super('PreloadScene')
@@ -18,6 +21,8 @@ export class PreloadScene extends Scene {
     this.load.atlas('magician', magicianTexture, magicianMap)
 
     this.load.atlas('monster', monsterTexture, monsterMap)
+
+    this.load.atlas('soldier', soldierTexture, soldierAtlas)
   }
   
   create() {

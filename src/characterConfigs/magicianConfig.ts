@@ -2,10 +2,10 @@ import { SpriteConfig } from "../prefabs/Sprite"
 
 export const magicianConfig: SpriteConfig = {
   name: 'magician',
-  x: 300,
-  y: 550,
+  x: 400,
+  y: 570,
   texture: 'magician',
   frame: 'healthy',
-  attackValue: 40,
-  healthValue: 300
+  attackValue: 250,
+  healthValue: 350
 }

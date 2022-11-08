@@ -9,24 +9,37 @@ export type SpriteConfig = {
   frame: string
   attackValue: number
   healthValue: number
+  autoPlay?: boolean
 }
 
 export class Sprite extends GameObjects.Sprite {
   public attackValue = 0
   public healthValue = 0
+  public autoPlay = false
   private maxHealth = 0
 
   healthBar: null | HealthBar = null
 
   constructor(scene: Scene, props: SpriteConfig) {
-    const { x, y, texture, frame, name, attackValue, healthValue } = props
+    const { 
+      x, 
+      y, 
+      texture, 
+      frame, 
+      name, 
+      attackValue, 
+      healthValue, 
+      autoPlay = false
+    } = props
+
     super(scene, x, y, texture, frame)
 
     this.name = name
     this.attackValue = attackValue
     this.healthValue = healthValue
     this.maxHealth = healthValue
-
+    this.autoPlay = autoPlay
+  
     this.init()
   }
 
@@ -40,7 +53,9 @@ export class Sprite extends GameObjects.Sprite {
     })
   }
 
-  attack() {
+  async attack() {
+    if (!this.isAlive()) return
+
     this.setFrame('attack')
 
     setTimeout(() => {
@@ -48,20 +63,32 @@ export class Sprite extends GameObjects.Sprite {
     }, 500)
   }
 
-  hurt(damage: number) {
+  async playInjured() {
+    return new Promise((res) => {
+      this.setFrame('injured')
+
+      setTimeout(() => {
+        if (!this.isAlive()) {
+          this.setFrame('dead')
+          return res(null)
+        }
+        this.setFrame('healthy')
+        res(null)
+      }, 500)
+    })
+  }
+
+  async hurt(damage: number) {
+    if (!this.isAlive()) return
+    
     this.healthValue -= damage
-
-    this.setFrame('injured')
-
-    setTimeout(() => {
-      if (this.healthValue <= 0) return
-      this.setFrame('healthy')
-    }, 500)
 
     const kProgressBar = this.healthValue / this.maxHealth
 
     if (this.healthBar) this.healthBar.change(kProgressBar)
 
+    await this.playInjured()  
+    
     if (this.healthValue <= 0) this.kill()
   }
 
