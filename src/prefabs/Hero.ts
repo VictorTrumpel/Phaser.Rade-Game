@@ -10,6 +10,7 @@ export type SpriteConfig = {
   attackValue: number
   healthValue: number
   autoPlay?: boolean
+  healthBarColor?: number
 }
 
 export class Hero extends GameObjects.Sprite {
@@ -18,7 +19,7 @@ export class Hero extends GameObjects.Sprite {
   public autoPlay = false
   private maxHealth = 0
 
-  healthBar: null | HealthBar = null
+  healthBar: HealthBar | null = null
 
   constructor(scene: Scene, props: SpriteConfig) {
     const { 
@@ -29,7 +30,8 @@ export class Hero extends GameObjects.Sprite {
       name, 
       attackValue, 
       healthValue, 
-      autoPlay = false
+      autoPlay = false,
+      healthBarColor = 0xeb4034
     } = props
 
     super(scene, x, y, texture, frame)
@@ -39,18 +41,19 @@ export class Hero extends GameObjects.Sprite {
     this.healthValue = healthValue
     this.maxHealth = healthValue
     this.autoPlay = autoPlay
+
+    this.healthBar = new HealthBar(this.scene, { 
+      x: this.x, 
+      y: this.y - this.height / 2,
+      color: healthBarColor
+    })
   
     this.init()
   }
 
   init() {
     this.setInteractive()
-    this.scene.add.existing(this)
-
-    this.healthBar = new HealthBar(this.scene, { 
-      x: this.x, 
-      y: this.y - this.height / 2
-    })
+    this.scene.add.existing(this)    
   }
 
   async attack() {

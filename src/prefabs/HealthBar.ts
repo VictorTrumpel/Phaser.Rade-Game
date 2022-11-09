@@ -1,8 +1,9 @@
-import { GameObjects, Scene, Types } from 'phaser'
+import { GameObjects, Scene } from 'phaser'
 
 type HealthBarOptions = {
   x: number
   y: number
+  color: number
 }
 
 export class HealthBar {
@@ -25,6 +26,8 @@ export class HealthBar {
     this.x = options.x - this.style.width / 2
     this.y = options.y
 
+    this.style.boxColor = options.color
+
     this.init()
   }
 
@@ -44,7 +47,8 @@ export class HealthBar {
   change(k: number) {
     if (!this.progressBox) return
     this.progressBox.clear()
-    .fillRect(
+    this.progressBox.fillStyle(this.style.boxColor)
+    this.progressBox.fillRect(
       this.x, 
       this.y, 
       this.style.width * (k < 0 ? 0 : k), 
