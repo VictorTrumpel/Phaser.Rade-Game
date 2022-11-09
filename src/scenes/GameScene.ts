@@ -40,6 +40,8 @@ export class GameScene extends Scene {
     this.heroes.push(rogue)
     this.heroes.push(monster)
     this.heroes.push(soldier)
+
+    this.heroes[0].halo.show()
     
     this.initEvents()
   }
@@ -63,6 +65,8 @@ export class GameScene extends Scene {
   }
 
   turnHero() {
+    this.heroes[this.activeHeroIndex].halo.hide()
+
     this.activeHeroIndex < this.heroes.length - 1
       ? this.activeHeroIndex += 1
       : this.activeHeroIndex = 0
@@ -74,7 +78,10 @@ export class GameScene extends Scene {
       return
     }
  
-    if (!nextHero.autoPlay) return
+    if (!nextHero.autoPlay) {
+      nextHero.halo.show()
+      return
+    }
 
     setTimeout(() => {
       const attackedHero = this.getFirstAlifeHeroFromTeam()

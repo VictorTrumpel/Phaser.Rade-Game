@@ -1,4 +1,5 @@
-import { HealthBar } from './HealthBar';
+import { Halo } from './Halo'
+import { HealthBar } from './HealthBar'
 import { GameObjects, Scene, Textures } from 'phaser'
 
 export type SpriteConfig = {
@@ -19,7 +20,8 @@ export class Hero extends GameObjects.Sprite {
   public autoPlay = false
   private maxHealth = 0
 
-  healthBar: HealthBar | null = null
+  healthBar: HealthBar
+  halo: Halo
 
   constructor(scene: Scene, props: SpriteConfig) {
     const { 
@@ -41,6 +43,12 @@ export class Hero extends GameObjects.Sprite {
     this.healthValue = healthValue
     this.maxHealth = healthValue
     this.autoPlay = autoPlay
+
+    this.halo = new Halo(this.scene, {
+      x: this.x,
+      y: this.y + this.height / 2 - 15,
+      color: healthBarColor
+    })
 
     this.healthBar = new HealthBar(this.scene, { 
       x: this.x, 

@@ -18,7 +18,7 @@ export class HealthBar {
     height: 15
   }
 
-  private progressBox: null | GameObjects.Graphics = null
+  private progressBox: GameObjects.Graphics
 
   constructor(scene: Scene, options: HealthBarOptions) {
     this.progressBox = scene.add.graphics()
@@ -32,8 +32,6 @@ export class HealthBar {
   }
 
   init() {
-    if (!this.progressBox) return
-
     this.progressBox
       .fillStyle(this.style.boxColor)
       .fillRect(
@@ -45,7 +43,6 @@ export class HealthBar {
   }
 
   change(k: number) {
-    if (!this.progressBox) return
     this.progressBox.clear()
     this.progressBox.fillStyle(this.style.boxColor)
     this.progressBox.fillRect(
