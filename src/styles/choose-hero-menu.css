@@ -1,0 +1,51 @@
+.choose-hero-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.choose-hero-window {
+  color: black;
+  background-color: white;
+  width: 50rem;
+  padding: 2rem;
+  border-radius: 0.4rem;
+}
+
+.heroes-list {
+  list-style: none;
+  display: flex;
+}
+
+.hero-list-item {
+  margin-right: 2rem;
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  width: 30rem;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-list-item img {
+  height: 12rem;
+}
+
+.hero-list-item label {
+  height: 100%;
+}
+
+.hero-item-title {
+  text-align: center;
+}
+
+.start-button-game {
+  padding: 0.2rem;
+}

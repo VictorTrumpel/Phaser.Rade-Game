@@ -1,10 +1,17 @@
+import { allCharacters } from './../characterConfigs/allCharacters';
 import { soldierConfig } from './../characterConfigs/soldierConfig';
 import { Scene } from 'phaser'
 import { Hero } from '../prefabs/Hero'
 import { monsterConfig } from '../characterConfigs/monsterConfig'
 import { magicianConfig } from '../characterConfigs/magicianConfig'
 import { rogueConfig } from '../characterConfigs/rogueConfig'
+import { ChooseHeroScenePayload } from './ChooseHeroScene';
 import gameSettings from '../gameSettings'
+
+const teamPositions: { x: number, y: number }[] = [
+  { x: 400, y: 510 },
+  { x: 500, y: 610 }
+]
 
 export class GameScene extends Scene {
   private heroes: Hero[]  = []
@@ -16,28 +23,35 @@ export class GameScene extends Scene {
     super('GameScene')
   }
 
-  create() {
+  create(data: ChooseHeroScenePayload) {
+    const checkedHeroes = data.checkedHeroes.splice(0, 2)
+
     this.createBg()
 
-    const magician = new Hero(this, magicianConfig)
-    
-    this.teamHeroes.push(magician)
-    
     const monster = new Hero(this, monsterConfig)
     monster.flipX = true
 
     const soldier = new Hero(this, soldierConfig)
     soldier.flipX = true
 
-    const rogue = new Hero(this, rogueConfig)
+    checkedHeroes.forEach((caste, idx) => {
+      const heroPayload = allCharacters.find((hero) => hero.caste === caste)
+      if (!heroPayload) return
+      const { config } = heroPayload
+      const position = teamPositions[idx]
+      const newHero = new Hero(this, {
+        ...config,
+        ...position,
+        healthBarColor: 0x3d6e16,
+        autoPlay: false
+      })
+      this.teamHeroes.push(newHero)
+      this.heroes.push(newHero)
+    })
 
-    this.teamHeroes.push(rogue)
-
+    // enemies
     this.enemyHeroes.push(monster)
     this.enemyHeroes.push(soldier)
-
-    this.heroes.push(magician)
-    this.heroes.push(rogue)
     this.heroes.push(monster)
     this.heroes.push(soldier)
 

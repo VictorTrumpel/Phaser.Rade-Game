@@ -22,6 +22,8 @@ export class PreloadScene extends Scene {
   }
 
   preload() {
+    console.log('PreloadScene :>> ');
+
     this.load.image('bg', bgImage)
 
     this.load.atlas('magician', magicianTexture, magicianMap)
@@ -36,6 +38,6 @@ export class PreloadScene extends Scene {
   }
   
   create() {
-    this.scene.start('GameScene')
+    this.scene.start('ChooseHeroScene')
   }
 }
