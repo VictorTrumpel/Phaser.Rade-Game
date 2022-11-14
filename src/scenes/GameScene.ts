@@ -1,11 +1,9 @@
-import { allCharacters } from './../characterConfigs/allCharacters';
-import { soldierConfig } from './../characterConfigs/soldierConfig';
+import { allCharacters } from './../characterConfigs/allCharacters'
+import { soldierConfig } from './../characterConfigs/soldierConfig'
 import { Scene } from 'phaser'
 import { Hero } from '../prefabs/Hero'
 import { monsterConfig } from '../characterConfigs/monsterConfig'
-import { magicianConfig } from '../characterConfigs/magicianConfig'
-import { rogueConfig } from '../characterConfigs/rogueConfig'
-import { ChooseHeroScenePayload } from './ChooseHeroScene';
+import { ChooseHeroScenePayload } from './ChooseHeroScene'
 import gameSettings from '../gameSettings'
 
 const teamPositions: { x: number, y: number }[] = [
@@ -58,6 +56,13 @@ export class GameScene extends Scene {
     this.heroes[0].halo.show()
     
     this.initEvents()
+  }
+
+  isGameOver() {
+    const allTeamDie = this.teamHeroes.every(hero => !hero.isAlive())
+    const allEnemyDie = this.enemyHeroes.every(hero => !hero.isAlive())
+
+    return allTeamDie || allEnemyDie
   }
 
   createBg() {
@@ -118,7 +123,12 @@ export class GameScene extends Scene {
 
     attackingSprite.attack()
 
-    attackedSprite.hurt(attackValue)
+    await attackedSprite.hurt(attackValue)
+
+    if (this.isGameOver()) {
+      this.scene.start('FinishFightScene')
+      return
+    }
 
     this.turnHero()
   }

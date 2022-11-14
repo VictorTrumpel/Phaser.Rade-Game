@@ -7,6 +7,6 @@ export const soldierConfig: SpriteConfig = {
   texture: 'soldier',
   frame: 'healthy',
   attackValue: 50,
-  healthValue: 400,
+  healthValue: 100,
   autoPlay: true
 }

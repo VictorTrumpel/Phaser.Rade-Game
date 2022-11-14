@@ -10,8 +10,5 @@
     "allowJs": true,
     "moduleResolution": "node",
     "resolveJsonModule": true
-  },
-  "include": [
-    "*.ts"
-  ]
+  }
 }

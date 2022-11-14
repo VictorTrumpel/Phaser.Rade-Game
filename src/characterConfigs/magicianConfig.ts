@@ -6,7 +6,7 @@ export const magicianConfig: SpriteConfig = {
   y: 510,
   texture: 'magician',
   frame: 'healthy',
-  attackValue: 50,
+  attackValue: 200,
   healthValue: 400,
   healthBarColor: 0x3d6e16
 }

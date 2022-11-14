@@ -1,15 +1,3 @@
-.choose-hero-menu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
 .choose-hero-window {
   color: black;
   background-color: white;

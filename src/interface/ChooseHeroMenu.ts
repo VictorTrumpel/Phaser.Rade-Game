@@ -60,7 +60,7 @@ export class ChooseHeroMenu extends BaseMenu {
   }
 
   readonly template = /*html*/`
-    <section class='choose-hero-menu'>
+    <section class='choose-hero-menu menu-window'>
       <div class='choose-hero-window'>
         <ul data-memo='heroes-list' class='heroes-list'>
           ${allCharacters.map(({ caste, imgPath }) => /*html*/`

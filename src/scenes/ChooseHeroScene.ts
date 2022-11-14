@@ -13,10 +13,6 @@ export class ChooseHeroScene extends Scene {
     super('ChooseHeroScene')
   }
 
-  preload() {
-    console.log('create hero scene :>> ')
-  }
-
   async create() {
     await this.chooseHeroMenu.create()
     this.chooseHeroMenu.render()
