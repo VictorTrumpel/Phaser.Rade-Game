@@ -1,9 +1,8 @@
-import { allCharacters } from './../characterConfigs/allCharacters'
-import { soldierConfig } from './../characterConfigs/soldierConfig'
+import { allCharacters, CharacterItem } from './../characterConfigs/allCharacters'
 import { Scene } from 'phaser'
 import { Hero } from '../prefabs/Hero'
-import { monsterConfig } from '../characterConfigs/monsterConfig'
 import { ChooseHeroScenePayload } from './ChooseHeroScene'
+import { Utils } from 'phaser'
 import gameSettings from '../gameSettings'
 
 const teamPositions: { x: number, y: number }[] = [
@@ -40,10 +39,9 @@ export class GameScene extends Scene {
 
     const checkedHeroesConfigs = data.checkedHeroes.splice(0, 2)
 
-    const enemiesHerosConfigs = [
-      allCharacters[randomInteger(0, allCharacters.length - 1)].caste,
-      allCharacters[randomInteger(0, allCharacters.length - 1)].caste
-    ]
+    const enemiesHerosConfigs = Array.from({ length: 2 }, () => 
+      getArrayRandom<CharacterItem>(allCharacters).caste
+    )
 
     checkedHeroesConfigs.forEach((caste, idx) => {
       const heroConfig = allCharacters.find((hero) => hero.caste === caste)?.config
@@ -125,7 +123,7 @@ export class GameScene extends Scene {
 
     setTimeout(() => {
       const aliveTeamHeroes = this.teamHeroes.filter(hero => hero.isAlive())
-      const attackedHero = aliveTeamHeroes[randomInteger(0, aliveTeamHeroes.length - 1)]
+      const attackedHero = getArrayRandom<Hero>(aliveTeamHeroes)
       attackedHero && this.attackSprite(attackedHero)
     }, 1000)
   }
@@ -170,8 +168,5 @@ export class GameScene extends Scene {
   }
 }
 
-function randomInteger(min: number, max: number) {
-  // получить случайное число от (min-0.5) до (max+0.5)
-  let rand = min - 0.5 + Math.random() * (max - min + 1);
-  return Math.round(rand);
-}
+const getArrayRandom = <T extends unknown>(array: readonly T[], startIndex?: number, endIndex?: number) =>
+  Utils.Array.GetRandom(array as any[], startIndex, endIndex) as T

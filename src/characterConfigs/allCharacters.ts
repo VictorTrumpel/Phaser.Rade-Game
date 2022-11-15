@@ -9,7 +9,7 @@ import monsterimgPath from '../assets/monster/monster-card-image.png'
 import rogueimgPath from '../assets/rogue/rogue-card-image.png'
 import soldierimgPath from '../assets/soldier/soldier-card-image.png'
 
-type CharacterItem = {
+export type CharacterItem = {
   caste: string
   config: SpriteConfig
   readonly imgPath: string
