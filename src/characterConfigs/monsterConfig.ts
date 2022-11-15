@@ -6,7 +6,7 @@ export const monsterConfig: SpriteConfig = {
   y: 500,
   texture: 'monster',
   frame: 'healthy',
-  attackValue: 100,
-  healthValue: 100,
+  attackValue: 30,
+  healthValue: 500,
   autoPlay: true
 }

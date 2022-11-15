@@ -8,7 +8,12 @@ import gameSettings from '../gameSettings'
 
 const teamPositions: { x: number, y: number }[] = [
   { x: 400, y: 510 },
-  { x: 500, y: 610 }
+  { x: 500, y: 610 },
+]
+
+const enemiesPositions: { x: number, y: number }[] = [
+  { x: 600, y: 500 },
+  { x: 700, y: 600 }
 ]
 
 export class GameScene extends Scene {
@@ -31,23 +36,21 @@ export class GameScene extends Scene {
   create(data: ChooseHeroScenePayload) {
     this.initScene()
 
-    const checkedHeroes = data.checkedHeroes.splice(0, 2)
-
     this.createBg()
 
-    const monster = new Hero(this, monsterConfig)
-    monster.flipX = true
+    const checkedHeroesConfigs = data.checkedHeroes.splice(0, 2)
 
-    const soldier = new Hero(this, soldierConfig)
-    soldier.flipX = true
+    const enemiesHerosConfigs = [
+      allCharacters[randomInteger(0, allCharacters.length - 1)].caste,
+      allCharacters[randomInteger(0, allCharacters.length - 1)].caste
+    ]
 
-    checkedHeroes.forEach((caste, idx) => {
-      const heroPayload = allCharacters.find((hero) => hero.caste === caste)
-      if (!heroPayload) return
-      const { config } = heroPayload
+    checkedHeroesConfigs.forEach((caste, idx) => {
+      const heroConfig = allCharacters.find((hero) => hero.caste === caste)?.config
+      if (!heroConfig) return
       const position = teamPositions[idx]
       const newHero = new Hero(this, {
-        ...config,
+        ...heroConfig,
         ...position,
         healthBarColor: 0x3d6e16,
         autoPlay: false
@@ -56,11 +59,20 @@ export class GameScene extends Scene {
       this.heroes.push(newHero)
     })
 
-    // enemies
-    this.enemyHeroes.push(monster)
-    this.enemyHeroes.push(soldier)
-    this.heroes.push(monster)
-    this.heroes.push(soldier)
+    enemiesHerosConfigs.forEach((caste, idx) => {
+      const heroConfig = allCharacters.find((hero) => hero.caste === caste)?.config
+      if (!heroConfig) return
+      const position = enemiesPositions[idx]
+      const newHero = new Hero(this, {
+        ...heroConfig,
+        ...position,
+        healthBarColor: 0xeb4034,
+        autoPlay: true
+      })
+      newHero.flipX = true
+      this.enemyHeroes.push(newHero)
+      this.heroes.push(newHero)
+    })
 
     this.heroes[0].halo.show()
     
@@ -112,7 +124,8 @@ export class GameScene extends Scene {
     }
 
     setTimeout(() => {
-      const attackedHero = this.getFirstAlifeHeroFromTeam()
+      const aliveTeamHeroes = this.teamHeroes.filter(hero => hero.isAlive())
+      const attackedHero = aliveTeamHeroes[randomInteger(0, aliveTeamHeroes.length - 1)]
       attackedHero && this.attackSprite(attackedHero)
     }, 1000)
   }
@@ -155,4 +168,10 @@ export class GameScene extends Scene {
   initEvents() {
     this.input.on('gameobjectdown', this.onClickSprite, this)
   }
+}
+
+function randomInteger(min: number, max: number) {
+  // получить случайное число от (min-0.5) до (max+0.5)
+  let rand = min - 0.5 + Math.random() * (max - min + 1);
+  return Math.round(rand);
 }

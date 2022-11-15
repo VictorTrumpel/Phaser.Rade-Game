@@ -6,7 +6,7 @@ export const rogueConfig: SpriteConfig = {
   y: 610,
   texture: 'rogue',
   frame: 'healthy',
-  attackValue: 70,
-  healthValue: 400,
+  attackValue: 80,
+  healthValue: 300,
   healthBarColor: 0x3d6e16
 }
