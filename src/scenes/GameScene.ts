@@ -21,7 +21,16 @@ export class GameScene extends Scene {
     super('GameScene')
   }
 
+  initScene() {
+    this.heroes = []
+    this.enemyHeroes = []
+    this.teamHeroes = []
+    this.activeHeroIndex = 0
+  }
+
   create(data: ChooseHeroScenePayload) {
+    this.initScene()
+
     const checkedHeroes = data.checkedHeroes.splice(0, 2)
 
     this.createBg()
