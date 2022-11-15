@@ -37,6 +37,7 @@ export class FinishFightMenu extends BaseMenu {
   readonly template = /*html*/`
     <section class='finish-fight-menu menu-window'>
       <h1>Сражение закончено</h1>
+      <br />
       <button data-memo='return-button'>Перейти к выбору героев</button>
     </section>
   `
