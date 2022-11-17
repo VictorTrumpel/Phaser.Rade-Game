@@ -1,4 +1,3 @@
-import { SpriteConfig } from './../prefabs/Hero';
 import { magicianConfig } from './magicianConfig'
 import { monsterConfig } from './monsterConfig'
 import { rogueConfig } from './rogueConfig'
@@ -9,9 +8,12 @@ import monsterimgPath from '../assets/monster/monster-card-image.png'
 import rogueimgPath from '../assets/rogue/rogue-card-image.png'
 import soldierimgPath from '../assets/soldier/soldier-card-image.png'
 
+import { IHeroConfig } from './IHeroConfig';
+
+
 export type CharacterItem = {
-  caste: string
-  config: SpriteConfig
+  caste: IHeroConfig['name']
+  config: IHeroConfig
   readonly imgPath: string
 }
 

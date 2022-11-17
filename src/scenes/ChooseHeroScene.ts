@@ -1,8 +1,9 @@
 import { ChooseHeroMenu } from './../interface/ChooseHeroMenu'
 import { Scene } from 'phaser'
+import { IHeroConfig } from '../characterConfigs/IHeroConfig'
 
 export type ChooseHeroScenePayload = {
-  checkedHeroes: string[]
+  checkedHeroes: (IHeroConfig['name'])[]
 }
 
 export class ChooseHeroScene extends Scene {

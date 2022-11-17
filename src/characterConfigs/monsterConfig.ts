@@ -1,12 +1,9 @@
 import { SpriteConfig } from '../prefabs/Hero'
+import { IHeroConfig } from './IHeroConfig'
 
-export const monsterConfig: SpriteConfig = {
+export const monsterConfig: IHeroConfig = {
   name: 'monster',
-  x: 600,
-  y: 500,
   texture: 'monster',
-  frame: 'healthy',
   attackValue: 30,
   healthValue: 500,
-  autoPlay: true
 }

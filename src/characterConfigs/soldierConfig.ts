@@ -1,12 +1,8 @@
-import { SpriteConfig } from '../prefabs/Hero'
+import { IHeroConfig } from './IHeroConfig'
 
-export const soldierConfig: SpriteConfig = {
+export const soldierConfig: IHeroConfig = {
   name: 'soldier',
-  x: 700,
-  y: 600,
   texture: 'soldier',
-  frame: 'healthy',
   attackValue: 50,
   healthValue: 350,
-  autoPlay: true
 }

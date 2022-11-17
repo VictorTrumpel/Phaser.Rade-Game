@@ -1,8 +1,9 @@
 import { allCharacters } from '../characterConfigs/allCharacters'
 import { BaseMenu } from './BaseMenu'
+import { IHeroConfig } from '../characterConfigs/IHeroConfig'
 
 export class ChooseHeroMenu extends BaseMenu {
-  private _checkedHeroes: string[] = []
+  private _checkedHeroes: (IHeroConfig['name'])[] = []
 
   constructor() {
     super()
@@ -21,7 +22,7 @@ export class ChooseHeroMenu extends BaseMenu {
 
     if (!inputHero) return
 
-    const value = inputHero.value
+    const value = inputHero.value as IHeroConfig['name']
 
     if (this._checkedHeroes.includes(value)) {
       this._checkedHeroes = this._checkedHeroes.filter((cast) => cast !== value)

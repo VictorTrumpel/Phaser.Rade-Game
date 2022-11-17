@@ -65,32 +65,11 @@ export class Hero extends GameObjects.Sprite {
   }
 
   async attack() {
-    if (!this.isAlive()) return
-
-    this.setFrame('attack')
-
-    setTimeout(() => {
-      this.setFrame('healthy')
-    }, 500)
-  }
-
-  async playInjured() {
-    return new Promise((res) => {
-      this.setFrame('injured')
-
-      setTimeout(() => {
-        if (!this.isAlive()) {
-          this.setFrame('dead')
-          return res(null)
-        }
-        this.setFrame('healthy')
-        res(null)
-      }, 500)
-    })
+    await this.playAttack()
   }
 
   async hurt(damage: number) {
-    if (!this.isAlive()) return
+    if (!this.isAlive()) return 
     
     this.healthValue -= damage
 
@@ -107,6 +86,32 @@ export class Hero extends GameObjects.Sprite {
     this.setFrame('dead')
     this.disableInteractive()
   } 
+
+  async playInjured() {
+    return new Promise((res) => {
+      this.setFrame('injured')
+
+      setTimeout(() => {
+        if (!this.isAlive()) {
+          this.setFrame('dead')
+          return res(null)
+        }
+        this.setFrame('healthy')
+        res(null)
+      }, 500)
+    })
+  }
+
+  async playAttack() {
+    return new Promise((res) => {
+      this.setFrame('attack')
+
+      setTimeout(() => {
+        this.setFrame('healthy')
+        res(null)
+      }, 500)
+    })
+  }
 
   isAlive() {
     if (this.healthValue > 0) return true

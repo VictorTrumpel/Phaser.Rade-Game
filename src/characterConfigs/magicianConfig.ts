@@ -1,12 +1,8 @@
-import { SpriteConfig } from "../prefabs/Hero"
+import { IHeroConfig } from './IHeroConfig'
 
-export const magicianConfig: SpriteConfig = {
+export const magicianConfig: IHeroConfig = {
   name: 'magician',
-  x: 400,
-  y: 510,
   texture: 'magician',
-  frame: 'healthy',
   attackValue: 50,
   healthValue: 340,
-  healthBarColor: 0x3d6e16
 }
