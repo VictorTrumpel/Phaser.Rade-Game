@@ -112,6 +112,10 @@ export class HeroManager {
     const liveTeamPlayers = this.teamHeroes.filter(hero => hero.isAlive())
     const targetHero = getArrayRandom<Hero>(liveTeamPlayers)
 
+    if (!targetHero) {
+      throw new Error('tagetHero not defined')
+    }
+
     await this.artificalPause(500)
 
     await this.attackHero(targetHero)

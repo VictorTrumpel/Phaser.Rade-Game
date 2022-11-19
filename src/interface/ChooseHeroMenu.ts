@@ -1,6 +1,7 @@
 import { allCharacters } from '../characterConfigs/allCharacters'
 import { BaseMenu } from './BaseMenu'
 import { IHeroConfig } from '../characterConfigs/IHeroConfig'
+import tavernBackground from '../assets/tavern-bg.png'
 
 export class ChooseHeroMenu extends BaseMenu {
   private _checkedHeroes: (IHeroConfig['name'])[] = []
@@ -65,9 +66,11 @@ export class ChooseHeroMenu extends BaseMenu {
       <div class='choose-hero-window'>
         <ul data-memo='heroes-list' class='heroes-list'>
           ${allCharacters.map(({ caste, imgPath }) => /*html*/`
-            <li data-memo='${caste}' class='hero-list-item'> 
+            <li data-memo='${caste}' class='hero-list-item ${caste}'> 
               <label>
-                <img src='${imgPath}' alt='${caste}' />
+                <div class='hero-image-container'>
+                  <img src='${imgPath}' alt='${caste}' />
+                </div>
                 <h5 class='hero-item-title'>
                   ${caste} 
                   <input type='checkbox' value='${caste}' />
@@ -77,7 +80,7 @@ export class ChooseHeroMenu extends BaseMenu {
           `).join('')}
         </ul> 
         <button data-memo='start-button' class='start-button-game'>
-          Start the game
+          Fight!
         </button>
       </div>
     </section>
