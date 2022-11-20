@@ -4,6 +4,7 @@ import { Hero } from '../prefabs/Hero'
 import { ChooseHeroScenePayload } from './ChooseHeroScene'
 import { Utils } from 'phaser'
 import { HeroManager } from '../HeroManager'
+import { FinishFightMenu } from '../interface/FinishFightMenu'
 import gameSettings from '../gameSettings'
 
 const teamPositions: { x: number, y: number }[] = [
@@ -13,13 +14,8 @@ const teamPositions: { x: number, y: number }[] = [
   { x: 700, y: 600 }
 ]
 
-const enemiesPositions: { x: number, y: number }[] = [
-  { x: 600, y: 500 },
-  { x: 700, y: 600 }
-]
-
 export class GameScene extends Scene {
-  private heroManager: HeroManager
+  public heroManager: HeroManager
 
   constructor() {
     super('GameScene')
@@ -69,10 +65,16 @@ export class GameScene extends Scene {
   onClickHero(_: unknown, attackedSprite: Hero) {
     this.heroManager.startRound(attackedSprite)
   }
+  
+  async onFightOver() {
+    const finishFightScene = new FinishFightMenu(this)
+    await finishFightScene.create()
+    finishFightScene.render() 
+  }
 
   initEvents() {
     this.input.on('gameobjectdown', this.onClickHero, this)
-    this.events.on('fightOver', () => this.scene.start('FinishFightScene'))
+    this.events.on('fightOver', this.onFightOver, this)
   }
 }
 

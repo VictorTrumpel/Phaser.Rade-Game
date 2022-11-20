@@ -8,13 +8,14 @@ export type ChooseHeroScenePayload = {
 
 export class ChooseHeroScene extends Scene {
 
-  chooseHeroMenu = new ChooseHeroMenu()
+  chooseHeroMenu: ChooseHeroMenu
 
   constructor() {
     super('ChooseHeroScene')
   }
 
   async create() {
+    this.chooseHeroMenu = new ChooseHeroMenu()
     await this.chooseHeroMenu.create()
     this.chooseHeroMenu.render()
     this.chooseHeroMenu.onSubmit = this.handleSubmitChoise.bind(this)

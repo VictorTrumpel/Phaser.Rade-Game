@@ -53,6 +53,12 @@ export class HeroManager {
     this.heroes[this.activeHeroIndex].halo.show()
   }
 
+  getHeroesState() {
+    const myHeroesIsAlive = this.teamHeroes.some(hero => hero.isAlive())
+    const enemyHeroesIsAlive = this.enemyHeroes.some(hero => hero.isAlive())
+    return { myHeroesIsAlive, enemyHeroesIsAlive } 
+  }
+
   async startRound(targetHero: Hero) {
     const isCurrentHeroAutoPlay = this.heroes[this.activeHeroIndex].autoPlay
     const isTeamMate = !!this.teamHeroes.find(hero => hero === targetHero)

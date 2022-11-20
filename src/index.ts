@@ -2,7 +2,7 @@ import * as Phaser from 'phaser'
 import { GameScene } from './scenes/GameScene'
 import { PreloadScene } from './scenes/PreloadScene'
 import { ChooseHeroScene } from './scenes/ChooseHeroScene'
-import { FinishFightScene } from './scenes/FinishFightScene'
+import { GoodsManager } from './goods/GoodsManager'
 import gameSettings from './gameSettings'
 
 const config = {
@@ -12,8 +12,8 @@ const config = {
     PreloadScene,
     ChooseHeroScene,
     GameScene,
-    FinishFightScene
   ],
 }
 
+new GoodsManager()
 new Phaser.Game(config)

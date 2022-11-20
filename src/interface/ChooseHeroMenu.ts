@@ -1,10 +1,13 @@
 import { allCharacters } from '../characterConfigs/allCharacters'
 import { BaseMenu } from './BaseMenu'
 import { IHeroConfig } from '../characterConfigs/IHeroConfig'
-import tavernBackground from '../assets/tavern-bg.png'
+import { GoodsManager } from '../goods/GoodsManager'
+import goldIcon from '../assets/icons/gold-bars-icon.png'
+import expIcon from '../assets/icons/exp-icon.png'
 
 export class ChooseHeroMenu extends BaseMenu {
   private _checkedHeroes: (IHeroConfig['name'])[] = []
+  private goods = new GoodsManager()
 
   constructor() {
     super()
@@ -64,6 +67,15 @@ export class ChooseHeroMenu extends BaseMenu {
   readonly template = /*html*/`
     <section class='choose-hero-menu menu-window'>
       <div class='choose-hero-window'>
+        <div class='stats-line'>
+          <span class='stat gold-stat'>
+            <img src='${goldIcon}' alt='gold' class='stat-icon icon-img' />
+            ${this.goods.gold}
+          </span>
+          <span class='stat exp-stat'>
+            <img src='${expIcon}' alt='exp' class='stat-icon icon-img' />
+            ${this.goods.experience}</span>
+        </div>
         <ul data-memo='heroes-list' class='heroes-list'>
           ${allCharacters.map(({ caste, imgPath }) => /*html*/`
             <li data-memo='${caste}' class='hero-list-item ${caste}'> 

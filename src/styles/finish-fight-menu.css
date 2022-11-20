@@ -1,3 +1,43 @@
 .finish-fight-menu {
   color: white
 }
+
+.blur-filter {
+  filter: blur(0.3rem)
+}
+
+.finish-fight-window {
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.2rem;
+  background: rgba(255, 255, 255, 0.3);
+  color: black;
+}
+
+.fight-conclusion {
+  text-align: center;
+}
+
+.stat-icon {
+  width: 1.6rem;
+}
+
+.loot-table {
+  margin-top: 1rem;
+}
+
+.loot-value-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.loot-value-cell img {
+  margin-left: 0.3rem;
+}
+
+.return-button {
+  margin-top: 1rem;
+}

@@ -1,5 +1,9 @@
 import { Scene } from 'phaser'
 import bgImage from '../assets/background/desert.jpg'
+import tavernBGImage from '../assets/background/tavern-bg.png'
+
+import goldBarsIcon from '../assets/icons/gold-bars-icon.png'
+import expIcon from '../assets/icons/exp-icon.png'
 
 import magicianTexture from '../assets/magician/magic1.png'
 import * as magicianMap from '../assets/magician/magic1.json'
@@ -22,9 +26,12 @@ export class PreloadScene extends Scene {
   }
 
   preload() {
-    console.log('PreloadScene :>> ');
-
     this.load.image('bg', bgImage)
+
+    this.load.image('taverna-bg', tavernBGImage)
+
+    this.load.image('gold-bars-icon', goldBarsIcon)
+    this.load.image('exp-icon', expIcon)
 
     this.load.atlas('magician', magicianTexture, magicianMap)
 

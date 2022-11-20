@@ -8,7 +8,7 @@
   border-radius: 0.4rem;
   background-color: #52504c;
   color: black;
-  background-image: url('/src/assets/tavern-bg.png');
+  background-image: url('/src/assets/background/tavern-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -77,3 +77,22 @@
   color: #4d0b0b;
 }
 
+.stats-line {
+  position: absolute;
+  top: 6rem;
+  left: 14rem;
+  display: flex;
+  transform: rotate(4deg);
+  color: white;
+}
+
+.stats-line .stat {
+  margin-right: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.stats-line .stat-icon {
+  margin-right: 0.5rem;
+  width: 1.6rem;
+}
