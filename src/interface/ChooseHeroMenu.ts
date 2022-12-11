@@ -24,7 +24,8 @@ export class ChooseHeroMenu extends BaseMenu {
       ? e.target as HTMLInputElement & { value: IHeroConfig['name'] }
       : null
 
-    if (!inputHero) return
+    if (!inputHero) 
+      return
 
     const heroCast = inputHero.value
     const heroConfig = allCharacters.find((hero) => heroCast === hero.caste)!
@@ -35,9 +36,12 @@ export class ChooseHeroMenu extends BaseMenu {
       return
     }
 
-    this.goods.gold = this.goods.gold - heroConfig.cost
+    if (heroConfig.cost > this.goods.gold)
+      return
 
     this._checkedHeroes.push(heroCast)
+
+    this.goods.gold = this.goods.gold - heroConfig.cost 
   }
 
   onSubmit = () => {}
@@ -52,6 +56,28 @@ export class ChooseHeroMenu extends BaseMenu {
       this.goldStat.innerText = this.goods.gold + ''
     if (this.expStat)
       this.expStat.innerText = this.goods.experience + ''
+    if (this.characterList) {
+      const heroesList = this.characterList.querySelectorAll('li')
+
+      heroesList.forEach((heroLiItem) => {
+        const input = heroLiItem.querySelector('input')!
+        const caste = heroLiItem.dataset.cast as IHeroConfig['name']
+        const heroConfig = allCharacters.find(hero => hero.caste === caste)!
+        const isHeroChecked = Boolean(this._checkedHeroes.find(checkedCaste => 
+          caste === checkedCaste
+        ))
+        const isDisabledHero = heroConfig.cost > this.goods.gold
+
+        if (isDisabledHero && !isHeroChecked) {
+          heroLiItem.classList.add('disabled')
+          input.disabled = true
+          return
+        }
+
+        heroLiItem.classList.remove('disabled')
+        input.disabled = false
+      })
+    }
   }
 
   async create(): Promise<void> {
@@ -76,6 +102,32 @@ export class ChooseHeroMenu extends BaseMenu {
     this.startButton?.addEventListener('click', this.onStartBtnClick)
   }
 
+  readonly templateHeroes = () => 
+    allCharacters.map(({ caste, imgPath, cost }) => /*html*/`
+      <li 
+        data-cast='${caste}' 
+        class='hero-list-item ${caste} ${cost > this.goods.gold ? 'disabled' : ''}'
+      > 
+        <label>
+          <div class='hero-image-container'>
+            <img src='${imgPath}' alt='${caste}' class='hero-img' />
+          </div>
+          <h5 class='hero-item-title'>
+            ${caste} 
+            <input 
+              type='checkbox' 
+              value='${caste}' 
+              ${cost > this.goods.gold ? 'disabled' : ''}
+            />
+          </h5>
+          <span class='hero-cost'>
+            <img src='${goldIcon}' alt='gold' class='stat-icon icon-img' />
+            ${cost}
+          </span>
+        </label>
+      </li>
+    `).join('')
+
   readonly template = /*html*/`
     <section class='choose-hero-menu menu-window'>
       <div class='choose-hero-window'>
@@ -91,23 +143,7 @@ export class ChooseHeroMenu extends BaseMenu {
           </span>
         </div>
         <ul data-memo='heroes-list' class='heroes-list'>
-          ${allCharacters.map(({ caste, imgPath, cost }) => /*html*/`
-            <li class='hero-list-item ${caste}'> 
-              <label>
-                <div class='hero-image-container'>
-                  <img src='${imgPath}' alt='${caste}' class='hero-img' />
-                </div>
-                <h5 class='hero-item-title'>
-                  ${caste} 
-                  <input type='checkbox' value='${caste}' />
-                </h5>
-                <span class='hero-cost'>
-                  <img src='${goldIcon}' alt='gold' class='stat-icon icon-img' />
-                  ${cost}
-                </span>
-              </label>
-            </li>
-          `).join('')}
+          ${this.templateHeroes()}
         </ul> 
         <button data-memo='start-button' class='start-button-game'>
           Fight!

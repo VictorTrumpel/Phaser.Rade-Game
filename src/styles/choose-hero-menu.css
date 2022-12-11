@@ -28,6 +28,10 @@
   color: white;
 }
 
+.hero-list-item.disabled {
+  opacity: 0.7;
+}
+
 .hero-list-item.magician {
   top: 16rem;
   transform: scale(0.9);
