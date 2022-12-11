@@ -1,7 +1,7 @@
-import { Hero } from './prefabs/Hero';
-import { IHeroConfig } from './characterConfigs/IHeroConfig'
+import { Hero } from '../prefabs/Hero';
+import { IHeroConfig } from '../characterConfigs/IHeroConfig'
 import { Scene, Utils } from 'phaser'
-import { allCharacters } from './characterConfigs/allCharacters'
+import { allCharacters } from '../characterConfigs/allCharacters'
 
 type CreateHeroCreds = {
   caste: IHeroConfig['name']
@@ -18,9 +18,7 @@ export class HeroManager {
 
   private isProcessing = false
   
-  constructor(
-    public scene: Scene
-  ) {
+  constructor(public scene: Scene) {
     this.scene = scene
   }
 

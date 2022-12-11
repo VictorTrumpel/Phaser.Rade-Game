@@ -3,7 +3,7 @@ import { Scene } from 'phaser'
 import { Hero } from '../prefabs/Hero'
 import { ChooseHeroScenePayload } from './ChooseHeroScene'
 import { Utils } from 'phaser'
-import { HeroManager } from '../HeroManager'
+import { HeroManager } from '../manage/HeroManager'
 import { FinishFightMenu } from '../interface/FinishFightMenu'
 import gameSettings from '../gameSettings'
 

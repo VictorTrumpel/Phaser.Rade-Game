@@ -44,7 +44,7 @@
   transform: scale(0.8);
 }
 
-.hero-list-item.monster{
+.hero-list-item.monster {
   left: 30rem;
   top: 23rem;
 }
@@ -54,7 +54,7 @@
   justify-content: center;
 }
 
-.hero-list-item img {
+.hero-list-item .hero-img {
   height: 12rem;
 }
 
@@ -63,10 +63,22 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 }
 
+.hero-list-item .hero-cost {
+  display: flex;
+}
+
+.hero-list-item .stat-icon {
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
 .hero-item-title {
+  display: flex;
   text-align: center;
 }
 

@@ -1,7 +1,7 @@
-import { HeroManager } from './../HeroManager';
+import { HeroManager } from '../manage/HeroManager';
 import { Scene } from 'phaser'
 import { BaseMenu } from './BaseMenu'
-import { GoodsManager } from '../goods/GoodsManager';
+import { GoodsManager } from '../manage/GoodsManager';
 import goldIcon from '../assets/icons/gold-bars-icon.png'
 import expIcon from '../assets/icons/exp-icon.png'
 

@@ -1,7 +1,7 @@
 import { allCharacters } from '../characterConfigs/allCharacters'
 import { BaseMenu } from './BaseMenu'
 import { IHeroConfig } from '../characterConfigs/IHeroConfig'
-import { GoodsManager } from '../goods/GoodsManager'
+import { GoodsManager } from '../manage/GoodsManager'
 import goldIcon from '../assets/icons/gold-bars-icon.png'
 import expIcon from '../assets/icons/exp-icon.png'
 
@@ -21,19 +21,23 @@ export class ChooseHeroMenu extends BaseMenu {
     // @ts-ignore
     const tagName = e.target?.tagName
     const inputHero = tagName === 'INPUT' 
-      ? e.target as HTMLInputElement 
+      ? e.target as HTMLInputElement & { value: IHeroConfig['name'] }
       : null
 
     if (!inputHero) return
 
-    const value = inputHero.value as IHeroConfig['name']
+    const heroCast = inputHero.value
+    const heroConfig = allCharacters.find((hero) => heroCast === hero.caste)!
 
-    if (this._checkedHeroes.includes(value)) {
-      this._checkedHeroes = this._checkedHeroes.filter((cast) => cast !== value)
+    if (this._checkedHeroes.includes(heroCast)) {
+      this._checkedHeroes = this._checkedHeroes.filter((cast) => cast !== heroCast)
+      this.goods.gold = this.goods.gold + heroConfig.cost
       return
     }
 
-    this._checkedHeroes.push(value)
+    this.goods.gold = this.goods.gold - heroConfig.cost
+
+    this._checkedHeroes.push(heroCast)
   }
 
   onSubmit = () => {}
@@ -41,6 +45,13 @@ export class ChooseHeroMenu extends BaseMenu {
   onStartBtnClick = () => {
     if (this._checkedHeroes.length < 2) return
     this.onSubmit()
+  }
+
+  onUpdateGoods = () => {
+    if (this.goldStat)
+      this.goldStat.innerText = this.goods.gold + ''
+    if (this.expStat)
+      this.expStat.innerText = this.goods.experience + ''
   }
 
   async create(): Promise<void> {
@@ -57,6 +68,7 @@ export class ChooseHeroMenu extends BaseMenu {
   protected initEvents() {
     this.characterList?.addEventListener('click', this.onListClick)
     this.startButton?.addEventListener('click', this.onStartBtnClick)
+    this.goods.onUpdateGoods = this.onUpdateGoods
   }
 
   protected removeEvents() {
@@ -70,23 +82,29 @@ export class ChooseHeroMenu extends BaseMenu {
         <div class='stats-line'>
           <span class='stat gold-stat'>
             <img src='${goldIcon}' alt='gold' class='stat-icon icon-img' />
-            ${this.goods.gold}
+            <i data-memo='gold-stat'>${this.goods.gold}</i>
           </span>
+
           <span class='stat exp-stat'>
             <img src='${expIcon}' alt='exp' class='stat-icon icon-img' />
-            ${this.goods.experience}</span>
+            <i data-memo='exp-stat'>${this.goods.experience}</i>
+          </span>
         </div>
         <ul data-memo='heroes-list' class='heroes-list'>
-          ${allCharacters.map(({ caste, imgPath }) => /*html*/`
-            <li data-memo='${caste}' class='hero-list-item ${caste}'> 
+          ${allCharacters.map(({ caste, imgPath, cost }) => /*html*/`
+            <li class='hero-list-item ${caste}'> 
               <label>
                 <div class='hero-image-container'>
-                  <img src='${imgPath}' alt='${caste}' />
+                  <img src='${imgPath}' alt='${caste}' class='hero-img' />
                 </div>
                 <h5 class='hero-item-title'>
                   ${caste} 
                   <input type='checkbox' value='${caste}' />
                 </h5>
+                <span class='hero-cost'>
+                  <img src='${goldIcon}' alt='gold' class='stat-icon icon-img' />
+                  ${cost}
+                </span>
               </label>
             </li>
           `).join('')}
@@ -104,6 +122,14 @@ export class ChooseHeroMenu extends BaseMenu {
 
   protected get startButton(): HTMLButtonElement | undefined {
     return this.memoDOM.cache['start-button'] as HTMLButtonElement | undefined
+  }
+
+  protected get goldStat(): HTMLElement | undefined {
+    return this.memoDOM.cache['gold-stat'] as HTMLElement | undefined
+  }
+
+  protected get expStat(): HTMLElement | undefined {
+    return this.memoDOM.cache['exp-stat'] as HTMLElement | undefined
   }
 }
 

@@ -8,7 +8,8 @@ export class GoodsManager {
   private _gold: number
   private _experience: number
   static _instance: GoodsManager | undefined
-
+  private _onUpdateGoods: () => any = () => null
+  
   constructor(props?: GoodsManagerInitProps) {
     if (GoodsManager._instance) {
       return GoodsManager._instance
@@ -29,8 +30,10 @@ export class GoodsManager {
   }
 
   set gold(gold: number) {
+    if (gold == this._gold) return
     this._gold = gold
     localStorage.setItem('gold', `${gold}`)
+    this._onUpdateGoods()
   }
 
   get gold() {
@@ -38,11 +41,17 @@ export class GoodsManager {
   }
 
   set experience(exp: number) {
+    if (exp == this._experience) return
     this._experience = exp
     localStorage.setItem('experience', `${exp}`)
+    this._onUpdateGoods()
   }
 
   get experience() {
     return this._experience
+  }
+
+  set onUpdateGoods(callback: () => any ) {
+    this._onUpdateGoods = callback
   }
 }
