@@ -22,24 +22,24 @@ export const allCharacters: readonly CharacterItem[] = [
     caste: 'magician',
     config: magicianConfig,
     imgPath: magicianimgPath,
-    cost: 400
+    cost: 45
   },
   {
     caste: 'monster',
     config: monsterConfig,
     imgPath: monsterimgPath,
-    cost: 350
+    cost: 30
   },
   {
     caste: 'rogue',
     config: rogueConfig,
     imgPath: rogueimgPath,
-    cost: 420
+    cost: 50
   },
   {
     caste: 'soldier',
     config: soldierConfig,
     imgPath: soldierimgPath,
-    cost: 300
+    cost: 25
   }
 ] as const

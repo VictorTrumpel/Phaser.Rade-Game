@@ -24,8 +24,8 @@ export class FinishFightMenu extends BaseMenu {
 
 
   onBtnClick = () => {
-    this.scene.scene.start('ChooseHeroScene')
     this.destroy()
+    this.scene.scene.start('ChooseHeroScene')
   }
 
   constructor(scene: Scene & { heroManager: HeroManager }) {

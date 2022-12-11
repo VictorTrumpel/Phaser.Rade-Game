@@ -17,9 +17,15 @@ export class HeroManager {
   private activeHeroIndex = 0
 
   private isProcessing = false
+
+  private _onFightOver = () => null
   
   constructor(public scene: Scene) {
     this.scene = scene
+  }
+  
+  set onFightOver(callback: () => any) {
+    this._onFightOver = callback
   }
 
   createHeroes(creds: CreateHeroCreds[]) {
@@ -80,9 +86,8 @@ export class HeroManager {
     const allTeamDie = this.teamHeroes.every(hero => !hero.isAlive())
     const allEnemyDie = this.enemyHeroes.every(hero => !hero.isAlive())
 
-    if (allTeamDie || allEnemyDie) {
-      this.scene.events.emit('fightOver')
-    }
+    if (allTeamDie || allEnemyDie) 
+      this._onFightOver()
   }
 
   private async attackHero(targetHero: Hero) {

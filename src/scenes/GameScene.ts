@@ -8,14 +8,30 @@ import { FinishFightMenu } from '../interface/FinishFightMenu'
 import gameSettings from '../gameSettings'
 
 const teamPositions: { x: number, y: number }[] = [
-  { x: 400, y: 510 },
-  { x: 500, y: 610 },
-  { x: 600, y: 500 },
-  { x: 700, y: 600 }
+  { x: 500, y: 480 },
+  { x: 600, y: 590 },
+  { x: 370, y: 620 },
+  { x: 300, y: 500 },
+]
+
+const enemyPositions: { x: number, y: number }[] = [
+  { x: 750, y: 450 },
+  { x: 900, y: 550 }
 ]
 
 export class GameScene extends Scene {
   public heroManager: HeroManager
+
+  onClickHero = (_: unknown, attackedSprite: Hero) => {
+    this.heroManager.startRound(attackedSprite)
+  }
+
+  onFightOver = async () => {
+    console.log('fightOver :>> ');
+    const finishFightScene = new FinishFightMenu(this)
+    await finishFightScene.create()
+    finishFightScene.render() 
+  }
 
   constructor() {
     super('GameScene')
@@ -50,31 +66,26 @@ export class GameScene extends Scene {
       getArrayRandom<CharacterItem>(allCharacters).caste
     )
     
-    const teamHeroCasts = checkedHeroes.splice(0, 2)
-
-    const heroesCreds = [...teamHeroCasts, ...enemyHeroCasts].map((caste, idx) => ({
+    const teamHeroCreds = checkedHeroes.map((caste, idx) => ({
       caste,
       positionX: teamPositions[idx].x,
       positionY: teamPositions[idx].y,
-      isAutoplay: idx < 2 ? false : true
+      isAutoplay: false
     }))
 
-    this.heroManager.createHeroes(heroesCreds)
-  }
+    const enemyHeroCreds = enemyHeroCasts.map((caste, idx) => ({
+      caste,
+      positionX: enemyPositions[idx].x,
+      positionY: enemyPositions[idx].y,
+      isAutoplay: true
+    }))
 
-  onClickHero(_: unknown, attackedSprite: Hero) {
-    this.heroManager.startRound(attackedSprite)
-  }
-  
-  async onFightOver() {
-    const finishFightScene = new FinishFightMenu(this)
-    await finishFightScene.create()
-    finishFightScene.render() 
+    this.heroManager.createHeroes([...teamHeroCreds, ...enemyHeroCreds])
   }
 
   initEvents() {
-    this.input.on('gameobjectdown', this.onClickHero, this)
-    this.events.on('fightOver', this.onFightOver, this)
+    this.input.on('gameobjectdown', this.onClickHero)
+    this.heroManager.onFightOver = this.onFightOver
   }
 }
 
