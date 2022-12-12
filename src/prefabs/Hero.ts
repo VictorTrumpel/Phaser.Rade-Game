@@ -52,10 +52,29 @@ export class Hero extends GameObjects.Sprite {
 
     this.healthBar = new HealthBar(this.scene, { 
       x: this.x, 
-      y: this.y - this.height / 2,
+      y: this.y - this.height * 3 / 2,
       color: healthBarColor
     })
-  
+
+    const frames = this.anims.generateFrameNames('knight', {
+      prefix: 'knight_',
+      start: 1,
+      end: 23,
+    })
+
+    this.anims.create({
+      key: 'attack',
+      frames,
+      frameRate: 13,
+      repeat: 0,
+    })
+
+    this.on('animationcomplete-attack', (props: any) => {
+      console.log('props :>> ', props);
+      console.log('animationcomplete :>> ')
+    })
+
+
     this.init()
   }
 
@@ -103,14 +122,15 @@ export class Hero extends GameObjects.Sprite {
   }
 
   async playAttack() {
-    return new Promise((res) => {
-      this.setFrame('attack')
+    this.play('attack', true)
+    // return new Promise((res) => {
+    //   this.setFrame('attack')
 
-      setTimeout(() => {
-        this.setFrame('healthy')
-        res(null)
-      }, 500)
-    })
+    //   setTimeout(() => {
+    //     this.setFrame('healthy')
+    //     res(null)
+    //   }, 500)
+    // })
   }
 
   isAlive() {

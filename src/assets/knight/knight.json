@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "healthy.png",
+	"filename": "knight_1",
 	"frame": {"x":0,"y":0,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "2.png",
+	"filename": "knight_2",
 	"frame": {"x":0,"y":33,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "3.png",
+	"filename": "knight_3",
 	"frame": {"x":0,"y":66,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "4.png",
+	"filename": "knight_4",
 	"frame": {"x":0,"y":99,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -33,7 +33,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "5.png",
+	"filename": "knight_5",
 	"frame": {"x":0,"y":132,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -41,7 +41,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "6.png",
+	"filename": "knight_6",
 	"frame": {"x":0,"y":165,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -49,7 +49,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "7.png",
+	"filename": "knight_7",
 	"frame": {"x":0,"y":198,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -57,7 +57,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "8.png",
+	"filename": "knight_8",
 	"frame": {"x":0,"y":231,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -65,7 +65,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "9.png",
+	"filename": "knight_9",
 	"frame": {"x":0,"y":264,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -73,7 +73,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "10.png",
+	"filename": "knight_10",
 	"frame": {"x":0,"y":297,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -81,7 +81,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "11.png",
+	"filename": "knight_11",
 	"frame": {"x":0,"y":330,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -89,7 +89,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "12.png",
+	"filename": "knight_12",
 	"frame": {"x":0,"y":363,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -97,7 +97,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "13.png",
+	"filename": "knight_13",
 	"frame": {"x":0,"y":396,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -105,7 +105,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "14.png",
+	"filename": "knight_14",
 	"frame": {"x":0,"y":429,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -113,7 +113,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "15.png",
+	"filename": "knight_15",
 	"frame": {"x":0,"y":462,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -121,7 +121,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "16.png",
+	"filename": "knight_16",
 	"frame": {"x":0,"y":495,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -129,7 +129,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "17.png",
+	"filename": "knight_17",
 	"frame": {"x":0,"y":528,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -137,7 +137,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "18.png",
+	"filename": "knight_18",
 	"frame": {"x":0,"y":561,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -145,7 +145,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "19.png",
+	"filename": "knight_19",
 	"frame": {"x":0,"y":594,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -153,7 +153,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "20.png",
+	"filename": "knight_20",
 	"frame": {"x":0,"y":627,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -161,7 +161,7 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "21.png",
+	"filename": "knight_21",
 	"frame": {"x":0,"y":660,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
@@ -169,8 +169,16 @@
 	"sourceSize": {"w":64,"h":33}
 },
 {
-	"filename": "22.png",
+	"filename": "knight_22",
 	"frame": {"x":0,"y":693,"w":64,"h":33},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":33},
+	"sourceSize": {"w":64,"h":33}
+},
+{
+	"filename": "knight_23",
+	"frame": {"x":0,"y":0,"w":64,"h":33},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":33},
@@ -179,7 +187,7 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "knight.png",
+	"image": "knight_",
 	"format": "RGBA8888",
 	"size": {"w":64,"h":726},
 	"scale": "1",

@@ -1,12 +1,10 @@
 import { allCharacters, CharacterItem } from './../characterConfigs/allCharacters'
-import { knightConfig } from '../characterConfigs/knightConfig'
 import { Scene } from 'phaser'
 import { Hero } from '../prefabs/Hero'
 import { ChooseHeroScenePayload } from './ChooseHeroScene'
 import { Utils } from 'phaser'
 import { HeroManager } from '../manage/HeroManager'
 import { FinishFightMenu } from '../interface/FinishFightMenu'
-import { soldierConfig } from '../characterConfigs/soldierConfig'
 import gameSettings from '../gameSettings'
 
 const teamPositions: { x: number, y: number }[] = [
