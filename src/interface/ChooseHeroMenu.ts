@@ -47,7 +47,6 @@ export class ChooseHeroMenu extends BaseMenu {
   onSubmit = () => {}
 
   onStartBtnClick = () => {
-    if (this._checkedHeroes.length < 2) return
     this.onSubmit()
   }
 

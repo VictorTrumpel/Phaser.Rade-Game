@@ -1,4 +1,5 @@
 import * as Phaser from 'phaser'
+import { CANVAS } from 'phaser'
 import { GameScene } from './scenes/GameScene'
 import { PreloadScene } from './scenes/PreloadScene'
 import { ChooseHeroScene } from './scenes/ChooseHeroScene'
@@ -16,4 +17,7 @@ const config = {
 }
 
 new GoodsManager()
-new Phaser.Game(config)
+const game = new Phaser.Game(config)
+
+//@ts-ignore
+CANVAS.setSmoothingEnabled(game.context, false);

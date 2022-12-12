@@ -1,4 +1,3 @@
-import { SpriteConfig } from '../prefabs/Hero'
 import { IHeroConfig } from './IHeroConfig'
 
 export const monsterConfig: IHeroConfig = {

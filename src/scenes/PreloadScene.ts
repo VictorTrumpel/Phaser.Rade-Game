@@ -5,6 +5,9 @@ import tavernBGImage from '../assets/background/tavern-bg.png'
 import goldBarsIcon from '../assets/icons/gold-bars-icon.png'
 import expIcon from '../assets/icons/exp-icon.png'
 
+import knightTexture from '../assets/knight/knight.png'
+import * as knightMap from '../assets/knight/knight.json'
+
 import magicianTexture from '../assets/magician/magic1.png'
 import * as magicianMap from '../assets/magician/magic1.json'
 
@@ -32,6 +35,8 @@ export class PreloadScene extends Scene {
 
     this.load.image('gold-bars-icon', goldBarsIcon)
     this.load.image('exp-icon', expIcon)
+
+    this.load.atlas('knight', knightTexture, knightMap)
 
     this.load.atlas('magician', magicianTexture, magicianMap)
 
