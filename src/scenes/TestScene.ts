@@ -5,8 +5,8 @@ import gameSettings from '../gameSettings'
 
 export class TestScene extends Scene {
 
-  onClickHero = (_: unknown, attackedSprite: Hero) => {
-    attackedSprite.playAttack()
+  onClickHero = async (_: unknown, attackedSprite: Hero) => {
+    await attackedSprite.playAttack()
     console.log('click :>> ')
   }
 
@@ -21,7 +21,7 @@ export class TestScene extends Scene {
       ...knightConfig,
       x: 500,
       y: 480,
-      frame: 'knight-attack1'
+      frame: 'idle_1.png'
     })
 
     knight.scale = 3.5

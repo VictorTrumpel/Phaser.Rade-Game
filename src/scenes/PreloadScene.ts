@@ -5,8 +5,8 @@ import tavernBGImage from '../assets/background/tavern-bg.png'
 import goldBarsIcon from '../assets/icons/gold-bars-icon.png'
 import expIcon from '../assets/icons/exp-icon.png'
 
-import knightTexture from '../assets/knight/knight.png'
-import * as knightMap from '../assets/knight/knight.json'
+import knightTexture from '../assets/knight/knightTexture.png'
+import * as knightMap from '../assets/knight/knightMap.json'
 
 import magicianTexture from '../assets/magician/magic1.png'
 import * as magicianMap from '../assets/magician/magic1.json'

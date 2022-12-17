@@ -1,6 +1,9 @@
 import { Halo } from './Halo'
 import { HealthBar } from './HealthBar'
-import { GameObjects, Scene, Textures } from 'phaser'
+import { GameObjects, Scene, Textures, Geom } from 'phaser'
+import knightHitArea from '../assets/knight/hit_area'
+import { resolve } from '../../webpack/webpack.common'
+import { HeroAnimationManager } from '../manage/HeroAnimationManager'
 
 export type SpriteConfig = {
   name: string
@@ -18,7 +21,10 @@ export class Hero extends GameObjects.Sprite {
   public attackValue = 0
   public healthValue = 0
   public autoPlay = false
+  
   private maxHealth = 0
+
+  public anims: HeroAnimationManager
 
   healthBar: HealthBar
   halo: Halo
@@ -38,6 +44,8 @@ export class Hero extends GameObjects.Sprite {
 
     super(scene, x, y, texture, frame)
 
+    this.setOrigin(0, 0)
+
     this.name = name
     this.attackValue = attackValue
     this.healthValue = healthValue
@@ -56,31 +64,23 @@ export class Hero extends GameObjects.Sprite {
       color: healthBarColor
     })
 
-    const frames = this.anims.generateFrameNames('knight', {
-      prefix: 'knight_',
-      start: 1,
-      end: 23,
-    })
-
-    this.anims.create({
-      key: 'attack',
-      frames,
-      frameRate: 13,
-      repeat: 0,
-    })
-
-    this.on('animationcomplete-attack', (props: any) => {
-      console.log('props :>> ', props);
-      console.log('animationcomplete :>> ')
-    })
-
-
     this.init()
   }
 
   init() {
     this.setInteractive()
+    this.input.hitArea = new Geom.Rectangle(
+      knightHitArea.x, 
+      knightHitArea.y, 
+      knightHitArea.width, 
+      knightHitArea.height
+    )
+    this.input.cursor = 'pointer'
+
     this.scene.add.existing(this)    
+
+    this.anims = new HeroAnimationManager(this)
+    this.anims.playIdle()
   }
 
   async attack() {
@@ -122,15 +122,8 @@ export class Hero extends GameObjects.Sprite {
   }
 
   async playAttack() {
-    this.play('attack', true)
-    // return new Promise((res) => {
-    //   this.setFrame('attack')
-
-    //   setTimeout(() => {
-    //     this.setFrame('healthy')
-    //     res(null)
-    //   }, 500)
-    // })
+    await this.anims.playAttack()
+    this.anims.playIdle()
   }
 
   isAlive() {
