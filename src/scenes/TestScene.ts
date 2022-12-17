@@ -5,39 +5,48 @@ import gameSettings from '../gameSettings'
 
 export class TestScene extends Scene {
 
+  knight: Hero
+
   onClickHero = async (_: unknown, attackedSprite: Hero) => {
     await attackedSprite.playAttack()
-    console.log('click :>> ')
   }
 
   constructor() {
     super('TestScene')
   }
 
+  onAttackButtonClick = async () => {
+    await this.knight.playAttack()
+  }
+
+  onDieButtonClick = async () => {
+    await this.knight.playDie()
+  }
+
+  init() {
+    const buttonAttack = document.createElement('button')
+    buttonAttack.onclick = this.onAttackButtonClick
+    buttonAttack.innerText = 'Атаковать'
+
+    const buttonDie = document.createElement('button')
+    buttonDie.onclick = this.onDieButtonClick
+    buttonDie.innerText = 'Убить'
+
+    document.body.append(buttonAttack)
+    document.body.append(buttonDie)
+  }
+
   create() {
     this.createBg()
 
-    const knight = new Hero(this, {
+    this.knight = new Hero(this, {
       ...knightConfig,
       x: 500,
       y: 480,
       frame: 'idle_1.png'
     })
 
-    knight.scale = 3.5
-
-
-
-    // this.anims.create({
-    //   key: 'fight',
-    //   frames,
-    //   frameRate: 13,
-    //   repeat: -1
-    // })
-
-    // this.anims.play('fight', knight)
-
-    // knight.play('fight', true)
+    this.knight.scale = 3.5
 
     this.initEvents()
   }

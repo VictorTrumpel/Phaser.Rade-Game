@@ -1,9 +1,8 @@
 import { Halo } from './Halo'
 import { HealthBar } from './HealthBar'
 import { GameObjects, Scene, Textures, Geom } from 'phaser'
-import knightHitArea from '../assets/knight/hit_area'
-import { resolve } from '../../webpack/webpack.common'
 import { HeroAnimationManager } from '../manage/HeroAnimationManager'
+import knightHitArea from '../assets/knight/hit_area'
 
 export type SpriteConfig = {
   name: string
@@ -24,7 +23,7 @@ export class Hero extends GameObjects.Sprite {
   
   private maxHealth = 0
 
-  public anims: HeroAnimationManager
+  anims: HeroAnimationManager
 
   healthBar: HealthBar
   halo: Halo
@@ -43,8 +42,6 @@ export class Hero extends GameObjects.Sprite {
     } = props
 
     super(scene, x, y, texture, frame)
-
-    this.setOrigin(0, 0)
 
     this.name = name
     this.attackValue = attackValue
@@ -124,6 +121,10 @@ export class Hero extends GameObjects.Sprite {
   async playAttack() {
     await this.anims.playAttack()
     this.anims.playIdle()
+  }
+
+  async playDie() {
+    await this.anims.playDie()
   }
 
   isAlive() {

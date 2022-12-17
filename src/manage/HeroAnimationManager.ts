@@ -1,5 +1,6 @@
 import { Animations } from 'phaser'
 import { Hero } from '../prefabs/Hero'
+import { KnightFrameBuilder } from '../animationBuilder/KnightFrameBuilder'
 
 export class HeroAnimationManager extends Animations.AnimationState {
   private _animationResolver: () => void | null
@@ -7,7 +8,6 @@ export class HeroAnimationManager extends Animations.AnimationState {
 
   onAttackComplete = () => {
     this._animationResolver?.()
-    this.play('knight_idle')
   }
 
   constructor(hero: Hero) {
@@ -15,34 +15,11 @@ export class HeroAnimationManager extends Animations.AnimationState {
 
     this.hero = hero
 
-    const framesIdle = this.generateFrameNames('knight', {
-      prefix: 'idle_',
-      suffix: '.png',
-      start: 1,
-      end: 15,
-    })
+    const knightAnimsConfig = new KnightFrameBuilder(this)
 
-    const framesAttack = this.generateFrameNames('knight', {
-      prefix: 'attack_',
-      suffix: '.png',
-      start: 1,
-      end: 23,
-    })
-
-    this.create({
-      key: 'knight_idle',
-      frames: framesIdle,
-      frameRate: 12,
-      repeatDelay: 1000,
-      repeat: -1,
-    })
-
-    this.create({
-      key: 'knight_attack',
-      frames: framesAttack,
-      frameRate: 12,
-      repeatDelay: 1000,
-    })
+    this.create(knightAnimsConfig.idleAnimation)
+    this.create(knightAnimsConfig.attackAnimation)
+    this.create(knightAnimsConfig.dieAnimation)
 
     this.initEvents()
   } 
@@ -54,19 +31,23 @@ export class HeroAnimationManager extends Animations.AnimationState {
     })
   }
 
+  async playDie() {
+    return new Promise((res) => {
+      this.hero.play('knight_die', true)
+      this._animationResolver = res.bind(null);
+    })
+  }
+
+  async playInjured() {
+    console.log('injured')
+  }
+
   async playIdle() {
     this.hero.play('knight_idle')
   }
 
-  async playDie() {
-    // Запустить промисификацию анимации смерти
-    // return new Promise((res) => {
-    //   this.play('knight_attack', true)
-    //   this._animationResolver = res.bind(null);
-    // })
-  }
-
   private initEvents() {
-    this.parent.on('animationcomplete-knight_attack', this.onAttackComplete)
+    this.hero.on('animationcomplete-knight_attack', this.onAttackComplete)
+    this.hero.on('animationcomplete-knight_die', this.onAttackComplete)
   }
 }
