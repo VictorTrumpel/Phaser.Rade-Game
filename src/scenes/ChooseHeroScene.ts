@@ -5,7 +5,6 @@ import { IHeroConfig } from '../characterConfigs/IHeroConfig'
 export type ChooseHeroScenePayload = {
   checkedHeroes: (IHeroConfig['name'])[]
 }
-
 export class ChooseHeroScene extends Scene {
 
   chooseHeroMenu: ChooseHeroMenu

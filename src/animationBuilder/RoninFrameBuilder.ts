@@ -1,33 +1,33 @@
 import { BaseFrameBuilder } from './BaseFrameBuilder'
 import { Animations } from 'phaser'
 
-export class KnightFrameBuilder extends BaseFrameBuilder {
-  attackAnimationKey = 'knight_attack'
-  idleAnimationKey = 'knight_idle'
-  dieAnimationKey = 'knight_die'
+export class RoninFrameBuilder extends BaseFrameBuilder {
+  attackAnimationKey = 'ronin_attack'
+  idleAnimationKey = 'ronin_idle'
+  dieAnimationKey = 'ronin_die'
 
   constructor(animationState: Animations.AnimationState) {
     super(animationState)
 
-    const framesIdle = animationState.generateFrameNames('knight', {
+    const framesIdle = animationState.generateFrameNames('ronin', {
       prefix: 'idle_',
       suffix: '.png',
       start: 1,
-      end: 15,
+      end: 8,
     })
 
-    const framesAttack = animationState.generateFrameNames('knight', {
+    const framesAttack = animationState.generateFrameNames('ronin', {
       prefix: 'attack_',
       suffix: '.png',
       start: 1,
-      end: 23,
+      end: 25,
     })
 
-    const framesDie = animationState.generateFrameNames('knight', {
+    const framesDie = animationState.generateFrameNames('ronin', {
       prefix: 'die_',
       suffix: '.png',
       start: 1,
-      end: 15,
+      end: 16,
     })
 
     this.attackAnimation = {
@@ -52,4 +52,5 @@ export class KnightFrameBuilder extends BaseFrameBuilder {
       repeatDelay: 1000,
     }
   }
+
 }

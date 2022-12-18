@@ -8,6 +8,9 @@ import expIcon from '../assets/icons/exp-icon.png'
 import knightTexture from '../assets/knight/knightTexture.png'
 import * as knightMap from '../assets/knight/knightMap.json'
 
+import roninTexture from '../assets/ronin/Ronin_Atlas.png'
+import * as roninMap from '../assets/ronin/Ronin_Atlas.json'
+
 import magicianTexture from '../assets/magician/magic1.png'
 import * as magicianMap from '../assets/magician/magic1.json'
 
@@ -37,6 +40,8 @@ export class PreloadScene extends Scene {
     this.load.image('exp-icon', expIcon)
 
     this.load.atlas('knight', knightTexture, knightMap)
+
+    this.load.atlas('ronin', roninTexture, roninMap)
 
     this.load.atlas('magician', magicianTexture, magicianMap)
 

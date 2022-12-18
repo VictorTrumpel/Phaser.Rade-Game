@@ -1,11 +1,13 @@
+import { HeroCasts } from './../characterConfigs/IHeroConfig'
 import { Halo } from './Halo'
 import { HealthBar } from './HealthBar'
 import { GameObjects, Scene, Textures, Geom } from 'phaser'
 import { HeroAnimationManager } from '../manage/HeroAnimationManager'
+import { HitArea } from './HitArea'
 import knightHitArea from '../assets/knight/hit_area'
 
 export type SpriteConfig = {
-  name: string
+  name: HeroCasts
   x: number
   y: number
   texture: string | Textures.Texture
@@ -20,6 +22,7 @@ export class Hero extends GameObjects.Sprite {
   public attackValue = 0
   public healthValue = 0
   public autoPlay = false
+  readonly name: HeroCasts
   
   private maxHealth = 0
 
@@ -66,12 +69,7 @@ export class Hero extends GameObjects.Sprite {
 
   init() {
     this.setInteractive()
-    this.input.hitArea = new Geom.Rectangle(
-      knightHitArea.x, 
-      knightHitArea.y, 
-      knightHitArea.width, 
-      knightHitArea.height
-    )
+    this.input.hitArea = new HitArea(this.name)
     this.input.cursor = 'pointer'
 
     this.scene.add.existing(this)    

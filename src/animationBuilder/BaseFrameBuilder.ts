@@ -6,5 +6,9 @@ export class BaseFrameBuilder {
   idleAnimation: Phaser.Types.Animations.Animation
   dieAnimation: Phaser.Types.Animations.Animation
 
+  attackAnimationKey: string
+  idleAnimationKey: string
+  dieAnimationKey: string
+
   constructor(_: Animations.AnimationState) {}
 }
