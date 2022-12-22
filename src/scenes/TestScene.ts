@@ -3,6 +3,7 @@ import { Hero } from '../prefabs/Hero'
 import { knightConfig } from '../characterConfigs/knightConfig'
 import { magicianConfig } from '../characterConfigs/magicianConfig'
 import { roninConfig } from '../characterConfigs/roninConfig'
+import { svenConfig } from '../characterConfigs/svenConfig'
 import gameSettings from '../gameSettings'
 
 export class TestScene extends Scene {
@@ -42,14 +43,14 @@ export class TestScene extends Scene {
   create() {
     this.createBg()
 
-    this.knight = new Hero(this, {
-      ...knightConfig,
-      x: 500,
-      y: 480,
-      frame: 'idle_1.png'
-    })
+    // this.knight = new Hero(this, {
+    //   ...knightConfig,
+    //   x: 500,
+    //   y: 480,
+    //   frame: 'idle_1.png'
+    // })
 
-    this.knight.scale = 3.5
+    // this.knight.scale = 3.5
 
     // this.knight = new Hero(this, {
     //   ...magicianConfig,
@@ -58,14 +59,14 @@ export class TestScene extends Scene {
     //   frame: 'health_1.png'
     // })
 
-    // this.knight = new Hero(this, {
-    //   ...roninConfig,
-    //   x: 500,
-    //   y: 480,
-    //   frame: 'idle_1.png'
-    // })
+    this.knight = new Hero(this, {
+      ...svenConfig,
+      x: 500,
+      y: 480,
+      frame: 'idle_1.png'
+    })
 
-    // this.knight.scale = 3.5
+    this.knight.scale = 3.5
 
     this.initEvents()
   }

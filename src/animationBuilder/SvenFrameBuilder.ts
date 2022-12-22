@@ -1,33 +1,33 @@
 import { BaseFrameBuilder } from './BaseFrameBuilder'
 import { Animations } from 'phaser'
 
-export class RoninFrameBuilder extends BaseFrameBuilder {
-  attackAnimationKey = 'ronin_attack'
-  idleAnimationKey = 'ronin_idle'
-  dieAnimationKey = 'ronin_die'
+export class SvenFrameBuilder extends BaseFrameBuilder {
+  attackAnimationKey = 'sven_attack'
+  idleAnimationKey = 'sven_idle'
+  dieAnimationKey = 'sven_die'
 
   constructor(animationState: Animations.AnimationState) {
     super(animationState)
 
-    const framesIdle = animationState.generateFrameNames('ronin', {
+    const framesIdle = animationState.generateFrameNames('sven', {
       prefix: 'idle_',
       suffix: '.png',
       start: 1,
-      end: 8,
+      end: 9,
     })
 
-    const framesAttack = animationState.generateFrameNames('ronin', {
+    const framesAttack = animationState.generateFrameNames('sven', {
       prefix: 'attack_',
       suffix: '.png',
       start: 1,
-      end: 25,
+      end: 21,
     })
 
-    const framesDie = animationState.generateFrameNames('ronin', {
+    const framesDie = animationState.generateFrameNames('sven', {
       prefix: 'die_',
       suffix: '.png',
       start: 1,
-      end: 16,
+      end: 4,
     })
 
     this.attackAnimation = {
@@ -40,7 +40,7 @@ export class RoninFrameBuilder extends BaseFrameBuilder {
     this.idleAnimation = {
       key: this.idleAnimationKey,
       frames: framesIdle,
-      frameRate: 12,
+      frameRate: 9,
       repeatDelay: 1000,
       repeat: -1,
     }

@@ -2,6 +2,7 @@ import { Geom } from 'phaser'
 import { HeroCasts } from '../characterConfigs/IHeroConfig'
 import knightHitArea from '../assets/knight/hit_area'
 import roninHitArea from '../assets/ronin/hit_area'
+import svenHitArea from '../assets/sven/hit_area'
 
 const hitAreas: Record<HeroCasts, { x: number, y: number, width: number, height: number }> = {
   knight: knightHitArea,
@@ -9,7 +10,8 @@ const hitAreas: Record<HeroCasts, { x: number, y: number, width: number, height:
   magician: roninHitArea,
   rogue: roninHitArea,
   soldier: roninHitArea,
-  monster: roninHitArea
+  monster: roninHitArea,
+  sven: svenHitArea
 }
 
 export class HitArea extends Geom.Rectangle {

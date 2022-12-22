@@ -1,4 +1,4 @@
-export type HeroCasts = 'magician' | 'monster' | 'rogue' | 'soldier' | 'knight' | 'ronin'
+export type HeroCasts = 'magician' | 'monster' | 'rogue' | 'soldier' | 'knight' | 'ronin' | 'sven'
 
 export interface IHeroConfig {
   name: HeroCasts

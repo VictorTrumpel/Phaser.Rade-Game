@@ -3,6 +3,7 @@ import { HeroCasts } from '../characterConfigs/IHeroConfig'
 import { KnightFrameBuilder } from './KnightFrameBuilder'
 import { MagicFrameBuilder } from './MagicFrameBuilder'
 import { RoninFrameBuilder } from './RoninFrameBuilder'
+import { SvenFrameBuilder } from './SvenFrameBuilder'
 
 const builders: Record<HeroCasts, typeof BaseFrameBuilder> = {
   knight: KnightFrameBuilder,
@@ -10,7 +11,8 @@ const builders: Record<HeroCasts, typeof BaseFrameBuilder> = {
   soldier: BaseFrameBuilder,
   monster: BaseFrameBuilder,
   rogue: BaseFrameBuilder,
-  ronin: RoninFrameBuilder
+  ronin: RoninFrameBuilder,
+  sven: SvenFrameBuilder
 }
 
 export default builders
