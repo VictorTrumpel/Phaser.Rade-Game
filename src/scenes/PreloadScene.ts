@@ -14,6 +14,9 @@ import * as roninMap from '../assets/ronin/Ronin_Atlas.json'
 import svenTexture from '../assets/sven/Sven_Atlas.png'
 import * as svenMap from '../assets/sven/Sven_Atlas.json'
 
+import rickTexture from '../assets/rick/Rick_Atlas.png'
+import * as rickMap from '../assets/rick/Rick_Atlas.json'
+
 import magicianTexture from '../assets/magician/magic1.png'
 import * as magicianMap from '../assets/magician/magic1.json'
 
@@ -45,6 +48,8 @@ export class PreloadScene extends Scene {
     this.load.atlas('knight', knightTexture, knightMap)
 
     this.load.atlas('sven', svenTexture, svenMap)
+
+    this.load.atlas('rick', rickTexture, rickMap)
 
     this.load.atlas('ronin', roninTexture, roninMap)
 

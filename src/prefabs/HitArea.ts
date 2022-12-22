@@ -3,6 +3,7 @@ import { HeroCasts } from '../characterConfigs/IHeroConfig'
 import knightHitArea from '../assets/knight/hit_area'
 import roninHitArea from '../assets/ronin/hit_area'
 import svenHitArea from '../assets/sven/hit_area'
+import rickHitArea from '../assets/rick/hit_area'
 
 const hitAreas: Record<HeroCasts, { x: number, y: number, width: number, height: number }> = {
   knight: knightHitArea,
@@ -11,7 +12,8 @@ const hitAreas: Record<HeroCasts, { x: number, y: number, width: number, height:
   rogue: roninHitArea,
   soldier: roninHitArea,
   monster: roninHitArea,
-  sven: svenHitArea
+  sven: svenHitArea,
+  rick: rickHitArea
 }
 
 export class HitArea extends Geom.Rectangle {
