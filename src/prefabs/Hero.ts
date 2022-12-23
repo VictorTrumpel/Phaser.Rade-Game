@@ -4,7 +4,6 @@ import { HealthBar } from './HealthBar'
 import { GameObjects, Scene, Textures, Geom } from 'phaser'
 import { HeroAnimationManager } from '../manage/HeroAnimationManager'
 import { HitArea } from './HitArea'
-import knightHitArea from '../assets/knight/hit_area'
 
 export type SpriteConfig = {
   name: HeroCasts
@@ -16,12 +15,14 @@ export type SpriteConfig = {
   healthValue: number
   autoPlay?: boolean
   healthBarColor?: number
+  invert?: boolean
 }
 
 export class Hero extends GameObjects.Sprite {
   public attackValue = 0
   public healthValue = 0
   public autoPlay = false
+  private invert = false
   readonly name: HeroCasts
   
   private maxHealth = 0
@@ -41,7 +42,8 @@ export class Hero extends GameObjects.Sprite {
       attackValue, 
       healthValue, 
       autoPlay = false,
-      healthBarColor = 0xeb4034
+      healthBarColor = 0xeb4034,
+      invert = false
     } = props
 
     super(scene, x, y, texture, frame)
@@ -51,6 +53,7 @@ export class Hero extends GameObjects.Sprite {
     this.healthValue = healthValue
     this.maxHealth = healthValue
     this.autoPlay = autoPlay
+    this.invert = invert
 
     this.halo = new Halo(this.scene, {
       x: this.x,
@@ -69,7 +72,12 @@ export class Hero extends GameObjects.Sprite {
 
   init() {
     this.setInteractive()
-    this.input.hitArea = new HitArea(this.name)
+
+    if (this.invert) 
+      this.flipX = true
+
+    this.input.hitArea = new HitArea(this.name, this.invert)
+
     this.input.cursor = 'pointer'
 
     this.scene.add.existing(this)    
@@ -102,18 +110,7 @@ export class Hero extends GameObjects.Sprite {
   } 
 
   async playInjured() {
-    return new Promise((res) => {
-      this.setFrame('injured')
-
-      setTimeout(() => {
-        if (!this.isAlive()) {
-          this.setFrame('dead')
-          return res(null)
-        }
-        this.setFrame('healthy')
-        res(null)
-      }, 500)
-    })
+    await this.anims.playInjured()
   }
 
   async playAttack() {
@@ -126,7 +123,6 @@ export class Hero extends GameObjects.Sprite {
   }
 
   isAlive() {
-    if (this.healthValue > 0) return true
-    return false
+    return this.healthValue > 0
   }
 }

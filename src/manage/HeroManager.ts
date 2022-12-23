@@ -37,6 +37,7 @@ export class HeroManager {
       const { caste, positionX, positionY, isAutoplay } = cred
       const heroConfig = allCharacters.find((hero) => hero.caste === caste)?.config
       if (!heroConfig) return
+
       const newHero = new Hero(this.scene, {
         ...heroConfig,
         x: positionX,
@@ -45,7 +46,9 @@ export class HeroManager {
         autoPlay: isAutoplay,
         healthBarColor: isAutoplay ? 0xeb4034 : 0x3d6e16
       })
+
       isAutoplay && (newHero.flipX = true)
+      
       isAutoplay 
         ? this.enemyHeroes.push(newHero)
         : this.teamHeroes.push(newHero)

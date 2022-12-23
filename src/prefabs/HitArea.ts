@@ -5,7 +5,7 @@ import roninHitArea from '../assets/ronin/hit_area'
 import svenHitArea from '../assets/sven/hit_area'
 import rickHitArea from '../assets/rick/hit_area'
 
-const hitAreas: Record<HeroCasts, { x: number, y: number, width: number, height: number }> = {
+const hitAreas: Record<HeroCasts, { x: number, invertX: number, y: number, width: number, height: number }> = {
   knight: knightHitArea,
   ronin: roninHitArea,
   magician: roninHitArea,
@@ -18,8 +18,11 @@ const hitAreas: Record<HeroCasts, { x: number, y: number, width: number, height:
 
 export class HitArea extends Geom.Rectangle {
   
-  constructor(hero: HeroCasts) {
-    const { x, y, width, height } = hitAreas[hero]
-    super(x, y, width, height)
+  constructor(hero: HeroCasts, invert?: boolean) {
+    const { x, y, width, height, invertX } = hitAreas[hero]
+
+    const xPath = invert ? invertX : x
+
+    super(xPath, y, width, height)
   }
 }

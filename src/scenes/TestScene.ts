@@ -44,43 +44,37 @@ export class TestScene extends Scene {
   create() {
     this.createBg()
 
-    // this.knight = new Hero(this, {
-    //   ...knightConfig,
-    //   x: 500,
-    //   y: 480,
-    //   frame: 'idle_1.png'
-    // })
+    this.knight = new Hero(this, {
+      ...knightConfig,
+      x: 500,
+      y: 480,
+      frame: 'idle_1.png',
+    })
 
     // this.knight = new Hero(this, {
     //   ...roninConfig,
     //   x: 500,
     //   y: 480,
-    //   frame: 'idle_1.png'
+    //   frame: 'idle_1.png',
+    //   invert: true
     // })
 
-    this.knight = new Hero(this, {
-      ...rickConfig,
-      x: 500,
-      y: 480,
-      frame: 'idle_1.png'
-    })
-
-    // this.knight.scale = 3.5
-
     // this.knight = new Hero(this, {
-    //   ...magicianConfig,
+    //   ...rickConfig,
     //   x: 500,
     //   y: 480,
-    //   frame: 'health_1.png'
+    //   frame: 'idle_1.png',
+    //   invert: true
     // })
 
     // this.knight = new Hero(this, {
     //   ...svenConfig,
     //   x: 500,
     //   y: 480,
-    //   frame: 'idle_1.png'
+    //   frame: 'idle_1.png',
+    //   // invert: true
     // })
-
+    
     this.knight.scale = 3.5
 
     this.initEvents()
