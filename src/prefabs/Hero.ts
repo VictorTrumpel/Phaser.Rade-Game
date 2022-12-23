@@ -105,7 +105,7 @@ export class Hero extends GameObjects.Sprite {
   }
 
   kill() {
-    this.setFrame('dead')
+    this.playDie()
     this.disableInteractive()
   } 
 

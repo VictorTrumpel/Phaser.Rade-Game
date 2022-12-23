@@ -4,7 +4,6 @@ import { GameScene } from './scenes/GameScene'
 import { PreloadScene } from './scenes/PreloadScene'
 import { ChooseHeroScene } from './scenes/ChooseHeroScene'
 import { GoodsManager } from './manage/GoodsManager'
-import { TestScene } from './scenes/TestScene'
 import gameSettings from './gameSettings'
 
 const config: Phaser.Types.Core.GameConfig = {
@@ -14,7 +13,6 @@ const config: Phaser.Types.Core.GameConfig = {
   pixelArt: true,
   scene: [
     PreloadScene,
-    // TestScene,
     ChooseHeroScene,
     GameScene,
   ],
