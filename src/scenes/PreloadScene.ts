@@ -5,8 +5,17 @@ import tavernBGImage from '../assets/background/tavern-bg.png'
 import goldBarsIcon from '../assets/icons/gold-bars-icon.png'
 import expIcon from '../assets/icons/exp-icon.png'
 
-import knightTexture from '../assets/knight/knight.png'
-import * as knightMap from '../assets/knight/knight.json'
+import knightTexture from '../assets/knight/knightTexture.png'
+import * as knightMap from '../assets/knight/knightMap.json'
+
+import roninTexture from '../assets/ronin/Ronin_Atlas.png'
+import * as roninMap from '../assets/ronin/Ronin_Atlas.json'
+
+import svenTexture from '../assets/sven/Sven_Atlas.png'
+import * as svenMap from '../assets/sven/Sven_Atlas.json'
+
+import rickTexture from '../assets/rick/Rick_Atlas.png'
+import * as rickMap from '../assets/rick/Rick_Atlas.json'
 
 import magicianTexture from '../assets/magician/magic1.png'
 import * as magicianMap from '../assets/magician/magic1.json'
@@ -38,6 +47,12 @@ export class PreloadScene extends Scene {
 
     this.load.atlas('knight', knightTexture, knightMap)
 
+    this.load.atlas('sven', svenTexture, svenMap)
+
+    this.load.atlas('rick', rickTexture, rickMap)
+
+    this.load.atlas('ronin', roninTexture, roninMap)
+
     this.load.atlas('magician', magicianTexture, magicianMap)
 
     this.load.atlas('monster', monsterTexture, monsterMap)
@@ -51,5 +66,6 @@ export class PreloadScene extends Scene {
   
   create() {
     this.scene.start('ChooseHeroScene')
+    // this.scene.start('TestScene')
   }
 }

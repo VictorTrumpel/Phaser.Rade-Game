@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "attack",
+	"filename": "attack_1.png",
 	"frame": {"x":0,"y":0,"w":230,"h":151},
 	"rotated": false,
 	"trimmed": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":230,"h":151}
 },
 {
-	"filename": "healthy",
+	"filename": "healthy_1.png",
 	"frame": {"x":230,"y":0,"w":160,"h":175},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":160,"h":175}
 },
 {
-	"filename": "dead",
+	"filename": "dead_1.png",
 	"frame": {"x":390,"y":0,"w":167,"h":99},
 	"rotated": false,
 	"trimmed": false,

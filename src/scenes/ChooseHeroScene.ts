@@ -1,11 +1,27 @@
 import { ChooseHeroMenu } from './../interface/ChooseHeroMenu'
+import { Hero } from '../prefabs/Hero'
+import { HeroCasts } from '../characterConfigs/IHeroConfig'
 import { Scene } from 'phaser'
 import { IHeroConfig } from '../characterConfigs/IHeroConfig'
+import { knightConfig } from '../characterConfigs/knightConfig'
+import { roninConfig } from '../characterConfigs/roninConfig'
+import { svenConfig } from '../characterConfigs/svenConfig'
+import { rickConfig } from '../characterConfigs/rickConfig'
+import { allCharacters } from '../characterConfigs/allCharacters'
+import gameSettings from '../gameSettings'
 
 export type ChooseHeroScenePayload = {
   checkedHeroes: (IHeroConfig['name'])[]
 }
 
+const heroSlots: { 
+  [caste in HeroCasts]: { x: number, y: number }
+} = {
+  knight: { x: 500, y: 480 },
+  ronin: { x: 210, y: 420 },
+  sven: { x: 1100, y: 480 },
+  rick: { x: 750, y: 550 }
+}
 export class ChooseHeroScene extends Scene {
 
   chooseHeroMenu: ChooseHeroMenu
@@ -15,10 +31,26 @@ export class ChooseHeroScene extends Scene {
   }
 
   async create() {
+    this.createBg()
+
+    allCharacters.forEach(({ caste, config }) => {
+      new Hero(this, {
+        ...config,
+        x: heroSlots[caste].x,
+        y: heroSlots[caste].y,
+        frame: 'idle_1.png'
+      }).scale = 4.3
+    })
+  
     this.chooseHeroMenu = new ChooseHeroMenu()
     await this.chooseHeroMenu.create()
     this.chooseHeroMenu.render()
     this.chooseHeroMenu.onSubmit = this.handleSubmitChoise.bind(this)
+  }
+
+  createBg() {
+    const bg = this.add.sprite(0, 0, 'taverna-bg').setOrigin(0)
+    bg.scale = 1.2
   }
 
   handleSubmitChoise() {
