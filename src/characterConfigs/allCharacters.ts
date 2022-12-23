@@ -1,45 +1,34 @@
-import { magicianConfig } from './magicianConfig'
-import { monsterConfig } from './monsterConfig'
-import { rogueConfig } from './rogueConfig'
-import { soldierConfig } from './soldierConfig'
 import { IHeroConfig } from './IHeroConfig'
-
-import magicianimgPath from '../assets/magician/magician-card-image.png'
-import monsterimgPath from '../assets/monster/monster-card-image.png'
-import rogueimgPath from '../assets/rogue/rogue-card-image.png'
-import soldierimgPath from '../assets/soldier/soldier-card-image.png'
-
+import { roninConfig } from './roninConfig'
+import { knightConfig } from './knightConfig'
+import { rickConfig } from './rickConfig'
+import { svenConfig } from './svenConfig'
 
 export type CharacterItem = {
   caste: IHeroConfig['name']
   config: IHeroConfig
   cost: number
-  readonly imgPath: string
 }
 
 export const allCharacters: readonly CharacterItem[] = [
   {
-    caste: 'magician',
-    config: magicianConfig,
-    imgPath: magicianimgPath,
+    caste: 'ronin',
+    config: roninConfig,
     cost: 45
   },
   {
-    caste: 'monster',
-    config: monsterConfig,
-    imgPath: monsterimgPath,
+    caste: 'knight',
+    config: knightConfig,
     cost: 30
   },
   {
-    caste: 'rogue',
-    config: rogueConfig,
-    imgPath: rogueimgPath,
+    caste: 'rick',
+    config: rickConfig,
     cost: 50
   },
   {
-    caste: 'soldier',
-    config: soldierConfig,
-    imgPath: soldierimgPath,
+    caste: 'sven',
+    config: svenConfig,
     cost: 25
   }
 ] as const

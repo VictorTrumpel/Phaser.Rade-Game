@@ -8,10 +8,6 @@ import { RickFrameBuilder } from './RickFrameBuilder'
 
 const builders: Record<HeroCasts, typeof BaseFrameBuilder> = {
   knight: KnightFrameBuilder,
-  magician: MagicFrameBuilder,
-  soldier: BaseFrameBuilder,
-  monster: BaseFrameBuilder,
-  rogue: BaseFrameBuilder,
   ronin: RoninFrameBuilder,
   sven: SvenFrameBuilder,
   rick: RickFrameBuilder

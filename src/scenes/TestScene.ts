@@ -1,10 +1,6 @@
 import { Scene } from 'phaser'
 import { Hero } from '../prefabs/Hero'
 import { knightConfig } from '../characterConfigs/knightConfig'
-import { magicianConfig } from '../characterConfigs/magicianConfig'
-import { roninConfig } from '../characterConfigs/roninConfig'
-import { svenConfig } from '../characterConfigs/svenConfig'
-import { rickConfig } from '../characterConfigs/rickConfig'
 import gameSettings from '../gameSettings'
 
 export class TestScene extends Scene {
@@ -21,7 +17,6 @@ export class TestScene extends Scene {
 
   onAttackButtonClick = async () => {
     await this.knight.playAttack()
-    console.log('attack :>> ')
   }
 
   onDieButtonClick = async () => {

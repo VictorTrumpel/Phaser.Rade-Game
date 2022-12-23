@@ -102,15 +102,12 @@ export class ChooseHeroMenu extends BaseMenu {
   }
 
   readonly templateHeroes = () => 
-    allCharacters.map(({ caste, imgPath, cost }) => /*html*/`
+    allCharacters.map(({ caste, cost }) => /*html*/`
       <li 
         data-cast='${caste}' 
         class='hero-list-item ${caste} ${cost > this.goods.gold ? 'disabled' : ''}'
       > 
         <label>
-          <div class='hero-image-container'>
-            <img src='${imgPath}' alt='${caste}' class='hero-img' />
-          </div>
           <h5 class='hero-item-title'>
             ${caste} 
             <input 

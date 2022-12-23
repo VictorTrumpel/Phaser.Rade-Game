@@ -8,10 +8,6 @@ import rickHitArea from '../assets/rick/hit_area'
 const hitAreas: Record<HeroCasts, { x: number, invertX: number, y: number, width: number, height: number }> = {
   knight: knightHitArea,
   ronin: roninHitArea,
-  magician: roninHitArea,
-  rogue: roninHitArea,
-  soldier: roninHitArea,
-  monster: roninHitArea,
   sven: svenHitArea,
   rick: rickHitArea
 }

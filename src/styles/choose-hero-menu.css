@@ -6,9 +6,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 0.4rem;
-  background-color: #52504c;
   color: black;
-  background-image: url('/src/assets/background/tavern-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -19,6 +17,7 @@
 }
 
 .hero-list-item {
+  /* border: 1px solid red; для отладки */ 
   position: absolute;
   left: 0;
   height: 13rem;
@@ -32,34 +31,26 @@
   opacity: 0.7;
 }
 
-.hero-list-item.magician {
+.hero-list-item.ronin {
   top: 16rem;
+  left: 4rem;
   transform: scale(0.9);
 }
 
-.hero-list-item.soldier {
-  left: 48rem;
+.hero-list-item.sven {
+  left: 46rem;
   top: 18rem;
 }
 
-.hero-list-item.rogue {
-  left: 19rem;
-  top: 16rem;
+.hero-list-item.knight {
+  left: 18.5rem;
+  top: 17.8rem;
   transform: scale(0.8);
 }
 
-.hero-list-item.monster {
+.hero-list-item.rick {
   left: 30rem;
-  top: 23rem;
-}
-
-.hero-image-container {
-  display: flex;
-  justify-content: center;
-}
-
-.hero-list-item .hero-img {
-  height: 12rem;
+  top: 22rem;
 }
 
 .hero-list-item label {
@@ -68,7 +59,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .hero-list-item .hero-cost {
@@ -95,7 +86,7 @@
 
 .stats-line {
   position: absolute;
-  top: 6rem;
+  top: 7.5rem;
   left: 14rem;
   display: flex;
   transform: rotate(4deg);

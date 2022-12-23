@@ -14,9 +14,9 @@ const config: Phaser.Types.Core.GameConfig = {
   pixelArt: true,
   scene: [
     PreloadScene,
-    TestScene
-    // ChooseHeroScene,
-    // GameScene,
+    // TestScene,
+    ChooseHeroScene,
+    GameScene,
   ],
 }
 
