@@ -45,14 +45,14 @@ export class HeroManager {
         frame: 'healthy',
         autoPlay: isAutoplay,
         healthBarColor: isAutoplay ? 0xeb4034 : 0x3d6e16,
-        invert: isAutoplay
+        invert: isAutoplay,
+        scale: 3
       })
-
-      newHero.scale = 3
       
       isAutoplay 
         ? this.enemyHeroes.push(newHero)
         : this.teamHeroes.push(newHero)
+        
       this.heroes.push(newHero)
     })
 

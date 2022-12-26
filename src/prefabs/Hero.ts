@@ -1,9 +1,10 @@
 import { HeroCasts } from './../characterConfigs/IHeroConfig'
 import { Halo } from './Halo'
 import { HealthBar } from './HealthBar'
-import { GameObjects, Scene, Textures, Geom } from 'phaser'
+import { GameObjects, Scene, Textures, Geom, Tilemaps } from 'phaser'
 import { HeroAnimationManager } from '../manage/HeroAnimationManager'
 import { HitArea } from './HitArea'
+import hitAreas from '../constants/hitAreas'
 
 export type SpriteConfig = {
   name: HeroCasts
@@ -16,16 +17,19 @@ export type SpriteConfig = {
   autoPlay?: boolean
   healthBarColor?: number
   invert?: boolean
+  scale?: number
 }
 
 export class Hero extends GameObjects.Sprite {
   public attackValue = 0
   public healthValue = 0
   public autoPlay = false
+
   private invert = false
-  readonly name: HeroCasts
-  
+  private healthBarColor = 0xeb4034
   private maxHealth = 0
+
+  readonly name: HeroCasts
 
   anims: HeroAnimationManager
 
@@ -43,7 +47,8 @@ export class Hero extends GameObjects.Sprite {
       healthValue, 
       autoPlay = false,
       healthBarColor = 0xeb4034,
-      invert = false
+      invert = false,
+      scale = 1
     } = props
 
     super(scene, x, y, texture, frame)
@@ -54,18 +59,8 @@ export class Hero extends GameObjects.Sprite {
     this.maxHealth = healthValue
     this.autoPlay = autoPlay
     this.invert = invert
-
-    this.halo = new Halo(this.scene, {
-      x: this.x,
-      y: this.y + this.height / 2 - 15,
-      color: healthBarColor
-    })
-
-    this.healthBar = new HealthBar(this.scene, { 
-      x: this.x, 
-      y: this.y - this.height * 3 / 2,
-      color: healthBarColor
-    })
+    this.healthBarColor = healthBarColor
+    this.scale = scale
 
     this.init()
   }
@@ -73,8 +68,26 @@ export class Hero extends GameObjects.Sprite {
   init() {
     this.setInteractive()
 
+    const xOrigin = (hitAreas[this.name].x + hitAreas[this.name].width / 2) / this.width
+    const yOrigin = 1
+
+    this.setOrigin(xOrigin, yOrigin)
+
     if (this.invert) 
       this.flipX = true
+
+    this.halo = new Halo(this.scene, {
+      x: this.x,
+      y: this.y,
+      color: this.healthBarColor
+    })
+
+    this.healthBar = new HealthBar(this.scene, { 
+      name: this.name,
+      x: this.x, 
+      y: this.y - this.height * this.scale + hitAreas[this.name].y * this.scale,
+      color: this.healthBarColor
+    })
 
     this.input.hitArea = new HitArea(this.name, this.invert)
 

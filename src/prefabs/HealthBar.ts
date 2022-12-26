@@ -1,6 +1,10 @@
 import { GameObjects, Scene } from 'phaser'
+import { HeroCasts } from '../characterConfigs/IHeroConfig'
+import hitAreas from '../constants/hitAreas'
+import barPositions from '../constants/barPositions'
 
 type HealthBarOptions = {
+  name: HeroCasts
   x: number
   y: number
   color: number
@@ -14,7 +18,7 @@ export class HealthBar {
   private style = {
     boxColor: 0xeb4034,
     barColor: 0xFFF8DC,
-    width: 150,
+    width: 120,
     height: 15
   }
 
@@ -24,7 +28,7 @@ export class HealthBar {
     this.progressBox = scene.add.graphics()
   
     this.x = options.x - this.style.width / 2
-    this.y = options.y
+    this.y = options.y - 25
 
     this.style.boxColor = options.color
 

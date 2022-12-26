@@ -17,10 +17,10 @@ export type ChooseHeroScenePayload = {
 const heroSlots: { 
   [caste in HeroCasts]: { x: number, y: number }
 } = {
-  knight: { x: 500, y: 480 },
-  ronin: { x: 210, y: 420 },
-  sven: { x: 1100, y: 480 },
-  rick: { x: 750, y: 550 }
+  knight: { x: 465, y: 550 },
+  ronin: { x: 160, y: 520 },
+  sven: { x: 1020, y: 570 },
+  rick: { x: 690, y: 650 }
 }
 export class ChooseHeroScene extends Scene {
 
@@ -38,8 +38,9 @@ export class ChooseHeroScene extends Scene {
         ...config,
         x: heroSlots[caste].x,
         y: heroSlots[caste].y,
-        frame: 'idle_1.png'
-      }).scale = 4.3
+        frame: 'idle_1.png',
+        scale: 4.3
+      })
     })
   
     this.chooseHeroMenu = new ChooseHeroMenu()

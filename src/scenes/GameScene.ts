@@ -8,15 +8,15 @@ import { FinishFightMenu } from '../interface/FinishFightMenu'
 import gameSettings from '../gameSettings'
 
 const teamPositions: { x: number, y: number }[] = [
-  { x: 500, y: 480 },
-  { x: 600, y: 590 },
-  { x: 370, y: 620 },
-  { x: 300, y: 500 },
+  { x: 500, y: 580 },
+  { x: 600, y: 690 },
+  { x: 370, y: 690 },
+  { x: 300, y: 600 },
 ]
 
 const enemyPositions: { x: number, y: number }[] = [
-  { x: 750, y: 450 },
-  { x: 900, y: 550 }
+  { x: 650, y: 580 },
+  { x: 900, y: 650 }
 ]
 
 export class GameScene extends Scene {

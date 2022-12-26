@@ -17,7 +17,7 @@
 }
 
 .hero-list-item {
-  /* border: 1px solid red; для отладки */ 
+  /* border: 1px solid red; */
   position: absolute;
   left: 0;
   height: 13rem;
