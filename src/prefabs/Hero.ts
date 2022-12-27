@@ -1,7 +1,7 @@
 import { HeroCasts } from './../characterConfigs/IHeroConfig'
 import { Halo } from './Halo'
 import { HealthBar } from './HealthBar'
-import { GameObjects, Scene, Textures, Geom, Tilemaps } from 'phaser'
+import { GameObjects, Scene, Textures } from 'phaser'
 import { HeroAnimationManager } from '../manage/HeroAnimationManager'
 import { HitArea } from './HitArea'
 import hitAreas from '../constants/hitAreas'
