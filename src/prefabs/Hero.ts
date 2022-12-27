@@ -68,10 +68,15 @@ export class Hero extends GameObjects.Sprite {
   init() {
     this.setInteractive()
 
+    const xInvertOrigin = (this.width - hitAreas[this.name].x - hitAreas[this.name].width / 2) / this.width
     const xOrigin = (hitAreas[this.name].x + hitAreas[this.name].width / 2) / this.width
     const yOrigin = 1
 
-    this.setOrigin(xOrigin, yOrigin)
+
+    this.setOrigin(
+      this.invert ? xInvertOrigin : xOrigin, 
+      yOrigin
+    )
 
     if (this.invert) 
       this.flipX = true

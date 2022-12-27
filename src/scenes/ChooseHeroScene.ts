@@ -34,7 +34,7 @@ export class ChooseHeroScene extends Scene {
     this.createBg()
 
     allCharacters.forEach(({ caste, config }) => {
-      new Hero(this, {
+      const hero = new Hero(this, {
         ...config,
         x: heroSlots[caste].x,
         y: heroSlots[caste].y,

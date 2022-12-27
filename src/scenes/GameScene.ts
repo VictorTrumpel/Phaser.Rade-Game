@@ -15,7 +15,7 @@ const teamPositions: { x: number, y: number }[] = [
 ]
 
 const enemyPositions: { x: number, y: number }[] = [
-  { x: 650, y: 580 },
+  { x: 750, y: 580 },
   { x: 900, y: 650 }
 ]
 
