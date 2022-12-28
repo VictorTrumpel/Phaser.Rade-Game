@@ -2,16 +2,10 @@ import { ChooseHeroMenu } from './../interface/ChooseHeroMenu'
 import { Hero } from '../prefabs/Hero'
 import { HeroCasts } from '../characterConfigs/IHeroConfig'
 import { Scene } from 'phaser'
-import { IHeroConfig } from '../characterConfigs/IHeroConfig'
-import { knightConfig } from '../characterConfigs/knightConfig'
-import { roninConfig } from '../characterConfigs/roninConfig'
-import { svenConfig } from '../characterConfigs/svenConfig'
-import { rickConfig } from '../characterConfigs/rickConfig'
 import { allCharacters } from '../characterConfigs/allCharacters'
-import gameSettings from '../gameSettings'
 
 export type ChooseHeroScenePayload = {
-  checkedHeroes: (IHeroConfig['name'])[]
+  checkedHeroes: HeroCasts[]
 }
 
 const heroSlots: { 

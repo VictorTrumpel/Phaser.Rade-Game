@@ -14,8 +14,8 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: [
     PreloadScene,
     ChooseHeroScene,
-    // GameScene,
-    BattleScene
+    GameScene,
+    // BattleScene
   ],
 }
 

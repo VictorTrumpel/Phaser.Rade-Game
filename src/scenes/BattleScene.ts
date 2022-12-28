@@ -5,22 +5,14 @@ import { svenConfig } from '../characterConfigs/svenConfig'
 import { knightConfig } from '../characterConfigs/knightConfig'
 import { Polygon } from '../prefabs/Polygon'
 import { rickConfig } from '../characterConfigs/rickConfig'
-import { POLYGON_HEIGHT, POLYGON_WIDTH } from '../constants/polygon'
+import { ButtlePolygon } from '../manage/BattlePolygon'
+import safariMap from '../maps/safariMap'
 import gameSettings from '../gameSettings'
 import * as Phaser from 'phaser'
 
-const startSceneX = 340
-const startSceneY = 550
-
-const ButtlePolygon = [
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0],
-  [0, 0, 0, 0, null],
-  [0, 0, null, null, null],
-  [0, 0, 0, 0, null],
-]
-
 export class BattleScene extends Scene {
+
+  buttlePolygon: ButtlePolygon
 
   constructor() {
     super('BattleScene')
@@ -29,31 +21,17 @@ export class BattleScene extends Scene {
   create() {
     this.createBg()
 
-    let x = startSceneX
-    let y = startSceneY  
+    this.buttlePolygon = new ButtlePolygon(this, 340, 550, safariMap)
 
-    ButtlePolygon.forEach((polygonRow, rowIdx) => {
-      polygonRow.forEach(polygonCell => {
-        if (polygonCell !== null) {
-          new Polygon(this, x, y)
-        }
-        x += POLYGON_WIDTH / 2
-        y += POLYGON_HEIGHT / 2
-      })
-      x = startSceneX + POLYGON_WIDTH * (rowIdx + 1)
-      y = startSceneY
-    })
+    const polyCord = this.buttlePolygon.getPolyCord(0, 2) || { x: 0, y: 0 }
     
     const hero = new Hero(this, {
       ...rickConfig,
-      x: 340,
-      y: 550,
+      x: polyCord.x,
+      y: polyCord.y,
       frame: 'idle_1.png',
       scale: 3
     })
-
-    
-
   }
 
   createBg() {
