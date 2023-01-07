@@ -22,38 +22,29 @@ export class HealthBar {
     height: 15
   }
 
-  private progressBox: GameObjects.Graphics
+  private progressBox: GameObjects.Rectangle
 
   constructor(scene: Scene, options: HealthBarOptions) {
-    this.progressBox = scene.add.graphics()
-  
     this.x = options.x - this.style.width / 2
-    this.y = options.y - 25
+    this.y = options.y
 
     this.style.boxColor = options.color
 
-    this.init()
+    this.progressBox = scene.add.rectangle(
+      this.x + this.style.width / 2,
+      this.y,
+      this.style.width,
+      this.style.height,
+      this.style.boxColor
+    )
   }
 
-  init() {
-    this.progressBox
-      .fillStyle(this.style.boxColor)
-      .fillRect(
-        this.x, 
-        this.y, 
-        this.style.width, 
-        this.style.height
-      )
+  moveTo(x: number, y: number) {
+    this.progressBox.x = x
+    this.progressBox.y = y
   }
 
   change(k: number) {
-    this.progressBox.clear()
-    this.progressBox.fillStyle(this.style.boxColor)
-    this.progressBox.fillRect(
-      this.x, 
-      this.y, 
-      this.style.width * (k < 0 ? 0 : k), 
-      this.style.height
-    )
+    this.progressBox.width = this.style.width * (k < 0 ? 0 : k)
   }
 }

@@ -4,6 +4,7 @@ import { HealthBar } from './HealthBar'
 import { GameObjects, Scene, Textures } from 'phaser'
 import { HeroAnimationManager } from '../manage/HeroAnimationManager'
 import { HitArea } from './HitArea'
+import { IInteractiveObject } from '../model/IInteractiveObject'
 import hitAreas from '../constants/hitAreas'
 
 export type SpriteConfig = {
@@ -20,7 +21,7 @@ export type SpriteConfig = {
   scale?: number
 }
 
-export class Hero extends GameObjects.Sprite {
+export class Hero extends GameObjects.Sprite implements IInteractiveObject {
   public attackValue = 0
   public healthValue = 0
   public autoPlay = false
@@ -35,6 +36,8 @@ export class Hero extends GameObjects.Sprite {
 
   healthBar: HealthBar
   halo: Halo
+
+  onClick = () => null
 
   constructor(scene: Scene, props: SpriteConfig) {
     const { 
@@ -72,7 +75,6 @@ export class Hero extends GameObjects.Sprite {
     const xOrigin = (hitAreas[this.name].x + hitAreas[this.name].width / 2) / this.width
     const yOrigin = 1
 
-
     this.setOrigin(
       this.invert ? xInvertOrigin : xOrigin, 
       yOrigin
@@ -90,7 +92,7 @@ export class Hero extends GameObjects.Sprite {
     this.healthBar = new HealthBar(this.scene, { 
       name: this.name,
       x: this.x, 
-      y: this.y - this.height * this.scale + hitAreas[this.name].y * this.scale,
+      y: this.heroTopY,
       color: this.healthBarColor
     })
 
@@ -127,6 +129,13 @@ export class Hero extends GameObjects.Sprite {
     this.disableInteractive()
   } 
 
+  move(x: number, y: number) {
+    this.x = x
+    this.y = y
+    this.halo.moveTo(x, y)
+    this.healthBar.moveTo(x, this.heroTopY)
+  }
+
   async playInjured() {
     await this.anims.playInjured()
   }
@@ -142,5 +151,13 @@ export class Hero extends GameObjects.Sprite {
 
   isAlive() {
     return this.healthValue > 0
+  }
+
+  get heroTopY() {
+    return this.y - this.height * this.scale + hitAreas[this.name].y * this.scale
+  }
+
+  update() {
+    // console.log('update :>> ')
   }
 }

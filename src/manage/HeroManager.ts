@@ -7,6 +7,7 @@ type CreateHeroCreds = {
   caste: IHeroConfig['name']
   positionX: number
   positionY: number
+  depth: number
   isAutoplay: boolean
 }
 
@@ -19,6 +20,10 @@ export class HeroManager {
   private isProcessing = false
 
   private _onFightOver = () => null
+
+  private _onHeroClick = (hero: Hero) => {
+    this.startRound(hero)
+  }
   
   constructor(public scene: Scene) {
     this.scene = scene
@@ -34,7 +39,7 @@ export class HeroManager {
     heroesCreds.sort(({ positionY: y1 }, { positionY: y2 }) => y1 - y2)
 
     heroesCreds.forEach((cred) => {
-      const { caste, positionX, positionY, isAutoplay } = cred
+      const { caste, positionX, positionY, isAutoplay, depth } = cred
       const heroConfig = allCharacters.find((hero) => hero.caste === caste)?.config
       if (!heroConfig) return
 
@@ -48,6 +53,10 @@ export class HeroManager {
         invert: isAutoplay,
         scale: 3
       })
+
+      newHero.depth = depth
+
+      newHero.onClick = this._onHeroClick.bind(this, newHero)
       
       isAutoplay 
         ? this.enemyHeroes.push(newHero)
@@ -65,6 +74,17 @@ export class HeroManager {
     const myHeroesIsAlive = this.teamHeroes.some(hero => hero.isAlive())
     const enemyHeroesIsAlive = this.enemyHeroes.some(hero => hero.isAlive())
     return { myHeroesIsAlive, enemyHeroesIsAlive } 
+  }
+
+  moveHero(x: number, y: number, depth: number) {
+    const activeHero = this.heroes[this.activeHeroIndex]
+    if (activeHero.autoPlay) return
+    activeHero.move(x, y)
+    activeHero.depth = depth
+  }
+
+  update() {
+    this.heroes.forEach(hero => hero.update())
   }
 
   async startRound(targetHero: Hero) {

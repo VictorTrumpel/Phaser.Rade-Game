@@ -8,36 +8,32 @@ type HaloOptions = {
 
 export class Halo {
 
-  private x = 0
-  private y = 0
-  private color = 0xeb4034
+  private _x = 0
+  private _y = 0
+  private _color = 0xeb4034
 
-  private halo: GameObjects.Graphics
+  private _ellipse: GameObjects.Ellipse
 
   constructor(scene: Scene, options: HaloOptions) {
-    this.halo = scene.add.graphics()
-  
-    this.x = options.x
-    this.y = options.y
-    this.color = options.color
+    this._x = options.x
+    this._y = options.y
+    this._color = options.color
+
+    this._ellipse = scene.add.ellipse(this._x, this._y, 100, 30, this._color)
+
+    this.hide()
   }
 
   hide() {
-    this.halo.clear()
+    this._ellipse.visible = false
   }
 
   show() {
-    if (!this.halo) return
+    this._ellipse.visible = true
 
-    const ellipse = new Geom.Ellipse(
-      this.x, 
-      this.y, 
-      130, 
-      30
-    )
+  }
 
-    this.halo.lineStyle(4, this.color, 1)
-
-    this.halo.strokeEllipseShape(ellipse, 15) 
+  moveTo(x: number, y: number) {
+    this._ellipse.setPosition(x, y)
   }
 }

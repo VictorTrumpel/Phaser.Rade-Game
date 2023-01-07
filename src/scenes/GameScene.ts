@@ -1,33 +1,22 @@
+import { Utils } from 'phaser'
 import { HeroCasts } from './../characterConfigs/IHeroConfig';
 import { allCharacters, CharacterItem } from './../characterConfigs/allCharacters'
 import { Scene } from 'phaser'
 import { Hero } from '../prefabs/Hero'
 import { ChooseHeroScenePayload } from './ChooseHeroScene'
-import { Utils } from 'phaser'
 import { HeroManager } from '../manage/HeroManager'
 import { FinishFightMenu } from '../interface/FinishFightMenu'
 import { ButtlePolygon } from '../manage/BattlePolygon'
+import { IInteractiveObject } from '../model/IInteractiveObject'
 import safariMap from '../maps/safariMap'
 import gameSettings from '../gameSettings'
-
-const teamPositions: { x: number, y: number }[] = [
-  { x: 500, y: 580 },
-  { x: 600, y: 690 },
-  { x: 370, y: 690 },
-  { x: 300, y: 600 },
-]
-
-const enemyPositions: { x: number, y: number }[] = [
-  { x: 750, y: 580 },
-  { x: 900, y: 650 }
-]
 
 export class GameScene extends Scene {
   public heroManager: HeroManager
   public buttleField: ButtlePolygon
 
-  onClickHero = (_: unknown, attackedSprite: Hero) => {
-    this.heroManager.startRound(attackedSprite)
+  onClickHero = (_: unknown, interactiveObject: IInteractiveObject) => {
+    interactiveObject.onClick()
   }
 
   onFightOver = async () => {
@@ -75,22 +64,26 @@ export class GameScene extends Scene {
     
     const teamHeroCreds = temporary__Payload.map((caste, idx) => {
       const polyCords = this.buttleField.getPolyCord(0, idx * 2) || { x: 0, y: 0 }
+      const depth = this.buttleField.getPolygon(0, idx * 2)?.depthForHero || 0
 
       return {
         caste,
         positionX: polyCords.x,
         positionY: polyCords.y,
+        depth,
         isAutoplay: false
       }
     })
 
     const enemyHeroCreds = enemyHeroCasts.map((caste, idx) => {
       const polyCords = this.buttleField.getPolyCord(2, idx * 2) || { x: 0, y: 0 }
+      const depth = this.buttleField.getPolygon(0, idx * 2)?.depthForHero || 0
 
       return {
         caste,
         positionX: polyCords.x,
         positionY: polyCords.y,
+        depth,
         isAutoplay: true
       }
     })
@@ -101,6 +94,10 @@ export class GameScene extends Scene {
   initEvents() {
     this.input.on('gameobjectdown', this.onClickHero)
     this.heroManager.onFightOver = this.onFightOver
+  }
+
+  update() {
+    this.heroManager.update()
   }
 }
 
