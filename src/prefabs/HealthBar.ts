@@ -1,10 +1,6 @@
 import { GameObjects, Scene } from 'phaser'
-import { HeroCasts } from '../characterConfigs/IHeroConfig'
-import hitAreas from '../constants/hitAreas'
-import barPositions from '../constants/barPositions'
 
 type HealthBarOptions = {
-  name: HeroCasts
   x: number
   y: number
   color: number

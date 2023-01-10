@@ -40,7 +40,6 @@ export class ButtlePolygon {
   createButtleGround() {
     let polyX = this.x
     let polyY = this.y 
-    let depth = 1 
 
     this._map.forEach((polygonRow, rowIdx) => {
       this._polyCords[rowIdx] = []
@@ -51,7 +50,6 @@ export class ButtlePolygon {
         this._polyMatrix[rowIdx][polyIdx] = null
 
         if (polygonCell !== null) {
-          console.log('depth :>> ', polyIdx + 1);
           const polygon = new Polygon(
             this._scene, 
             polyX, 

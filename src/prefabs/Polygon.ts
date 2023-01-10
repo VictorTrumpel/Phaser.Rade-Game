@@ -1,4 +1,5 @@
-import { GameObjects, Scene } from 'phaser'
+import { HitArea } from './HitArea';
+import { GameObjects, Scene, Geom } from 'phaser'
 import { IInteractiveObject } from '../model/IInteractiveObject'
 import { POLYGON_WIDTH, POLYGON_HEIGHT } from '../constants/polygon'
 
@@ -15,7 +16,14 @@ export class Polygon extends GameObjects.Ellipse implements IInteractiveObject {
 
     this.setStrokeStyle(2, 0x1a65ac)
 
-    this.setInteractive()
+    const hitArea = new Phaser.Geom.Polygon([
+      0, POLYGON_HEIGHT / 2,
+      POLYGON_WIDTH / 2, 0,
+      POLYGON_WIDTH, POLYGON_HEIGHT / 2,
+      POLYGON_WIDTH / 2, POLYGON_HEIGHT
+    ]);
+
+    this.setInteractive(hitArea, Geom.Polygon.Contains)
 
     this.depthForHero = depth
 

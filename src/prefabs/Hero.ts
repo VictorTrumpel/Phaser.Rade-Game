@@ -90,7 +90,6 @@ export class Hero extends GameObjects.Sprite implements IInteractiveObject {
     })
 
     this.healthBar = new HealthBar(this.scene, { 
-      name: this.name,
       x: this.x, 
       y: this.heroTopY,
       color: this.healthBarColor

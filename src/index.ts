@@ -19,4 +19,4 @@ const config: Phaser.Types.Core.GameConfig = {
 }
 
 new GoodsManager()
-new Phaser.Game(config)
+const game = new Phaser.Game(config)
