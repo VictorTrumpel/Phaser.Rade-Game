@@ -1,5 +1,5 @@
+import { HeroFightToggler } from './../manage/HeroFightToggler'
 import { Utils } from 'phaser'
-import { HeroCasts } from './../characterConfigs/IHeroConfig';
 import { allCharacters, CharacterItem } from './../characterConfigs/allCharacters'
 import { Scene } from 'phaser'
 import { Hero } from '../prefabs/Hero'
@@ -8,12 +8,15 @@ import { HeroManager } from '../manage/HeroManager'
 import { FinishFightMenu } from '../interface/FinishFightMenu'
 import { ButtlePolygon } from '../manage/BattlePolygon'
 import { IInteractiveObject } from '../model/IInteractiveObject'
+import { HeroTeams } from '../manage/HeroTeams'
 import safariMap from '../maps/safariMap'
 import gameSettings from '../gameSettings'
 
 export class GameScene extends Scene {
   public heroManager: HeroManager
   public buttleField: ButtlePolygon
+  public heroTeams: HeroTeams
+  public heroFightToggler: HeroFightToggler
 
   onClickHero = (_: unknown, interactiveObject: IInteractiveObject) => {
     interactiveObject.onClick()
@@ -35,12 +38,16 @@ export class GameScene extends Scene {
     this.createBg()
 
     this.buttleField = new ButtlePolygon(this, 340, 550, safariMap)
+
+    this.heroTeams = new HeroTeams(this, this.buttleField)
   }
 
   create(data: ChooseHeroScenePayload) {
-    this.initScene()    
+    this.initScene()
+    
+    this.heroTeams.createTeams(data.checkedHeroes)
 
-    this.createHeroes(data.checkedHeroes)
+    this.heroFightToggler = new HeroFightToggler(this.heroTeams)
 
     this.initEvents()
   }
@@ -55,45 +62,9 @@ export class GameScene extends Scene {
     ).setOrigin(0)
   }
 
-  createHeroes(checkedHeroes: ChooseHeroScenePayload['checkedHeroes']) {
-    const temporary__Payload: HeroCasts[] = ['rick', 'sven']
-
-    const enemyHeroCasts = Array.from({ length: 2 }, () => 
-      getArrayRandom<CharacterItem>(allCharacters).caste
-    )
-    
-    const teamHeroCreds = temporary__Payload.map((caste, idx) => {
-      const polyCords = this.buttleField.getPolyCord(0, idx * 2) || { x: 0, y: 0 }
-      const depth = this.buttleField.getPolygon(0, idx * 2)?.depthForHero || 0
-
-      return {
-        caste,
-        positionX: polyCords.x,
-        positionY: polyCords.y,
-        depth,
-        isAutoplay: false
-      }
-    })
-
-    const enemyHeroCreds = enemyHeroCasts.map((caste, idx) => {
-      const polyCords = this.buttleField.getPolyCord(2, idx * 2) || { x: 0, y: 0 }
-      const depth = this.buttleField.getPolygon(0, idx * 2)?.depthForHero || 0
-
-      return {
-        caste,
-        positionX: polyCords.x,
-        positionY: polyCords.y,
-        depth,
-        isAutoplay: true
-      }
-    })
-
-    this.heroManager.createHeroes([...teamHeroCreds, ...enemyHeroCreds])
-  }
-
   initEvents() {
     this.input.on('gameobjectdown', this.onClickHero)
-    this.heroManager.onFightOver = this.onFightOver
+    this.heroFightToggler.onFightOver = this.onFightOver
   }
 }
 
