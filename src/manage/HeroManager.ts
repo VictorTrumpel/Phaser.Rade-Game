@@ -83,10 +83,6 @@ export class HeroManager {
     activeHero.depth = depth
   }
 
-  update() {
-    this.heroes.forEach(hero => hero.update())
-  }
-
   async startRound(targetHero: Hero) {
     const isCurrentHeroAutoPlay = this.heroes[this.activeHeroIndex].autoPlay
     const isTeamMate = !!this.teamHeroes.find(hero => hero === targetHero)

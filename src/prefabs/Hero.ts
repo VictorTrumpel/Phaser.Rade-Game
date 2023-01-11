@@ -29,7 +29,6 @@ export class Hero extends GameObjects.Sprite implements IInteractiveObject {
   private invert = false
   private healthBarColor = 0xeb4034
   private maxHealth = 0
-  private speed = 5
 
   readonly name: HeroCasts
 

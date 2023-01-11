@@ -95,10 +95,6 @@ export class GameScene extends Scene {
     this.input.on('gameobjectdown', this.onClickHero)
     this.heroManager.onFightOver = this.onFightOver
   }
-
-  update() {
-    this.heroManager.update()
-  }
 }
 
 const getArrayRandom = <T extends unknown>(array: readonly T[], startIndex?: number, endIndex?: number) =>
