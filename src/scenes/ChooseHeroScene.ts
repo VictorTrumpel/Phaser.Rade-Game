@@ -52,8 +52,7 @@ export class ChooseHeroScene extends Scene {
     const payload: ChooseHeroScenePayload = {
       checkedHeroes: this.chooseHeroMenu.checkedHeroes
     }
-    this.scene.start('BattleScene', payload)
-    // this.scene.start('GameScene', payload)
+    this.scene.start('GameScene', payload)
     this.chooseHeroMenu.destroy()
   }
 }

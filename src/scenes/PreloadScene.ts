@@ -65,8 +65,8 @@ export class PreloadScene extends Scene {
   }
   
   create() {
-    // this.scene.start('ChooseHeroScene')
-    this.scene.start('GameScene')
+    this.scene.start('ChooseHeroScene')
+    // this.scene.start('GameScene')
     // this.scene.start('TestScene')
   }
 }
