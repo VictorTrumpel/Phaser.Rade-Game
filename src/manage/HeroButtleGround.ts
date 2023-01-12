@@ -1,31 +1,38 @@
-import { POLYGON_WIDTH, POLYGON_HEIGHT } from './../constants/polygon'
+import { POLYGON_WIDTH, POLYGON_HEIGHT } from '../constants/polygon'
 import { Scene } from 'phaser'
-import { HeroManager } from './HeroManager'
+import { HeroTeams } from './HeroTeams'
+import { HeroFightToggler } from './HeroFightToggler'
 import { Polygon } from '../prefabs/Polygon'
 
 export type ButtleMap = (0 | 1 | null)[][]
 export type PolyCords = ({ x: number, y: number } | null)[][]
 export type PolyMatrix = (Polygon | null)[][]
+export type HeroScene = Scene & {
+  heroTeams: HeroTeams
+  heroFightToggler: HeroFightToggler
+}
 
-export class ButtlePolygon {
+export class HeroButtleGround {
   readonly x: number
   readonly y: number
 
-  private _heroManager: HeroManager
-  private _scene: Scene
+  private _scene: HeroScene
   private _map: ButtleMap
   private _polyCords: PolyCords = []
   private _polyMatrix: PolyMatrix = []
 
   private _onPolygonClick = (polygon: Polygon) => {
-    this._heroManager.moveHero(polygon.x, polygon.y, polygon.depthForHero)
+    const allHeroes = this._scene.heroTeams.heroes
+    const activeHeroIdx = this._scene.heroFightToggler.activeHeroIndex
+    const heroNeedToMove = allHeroes[activeHeroIdx]
+    heroNeedToMove.move(polygon.x, polygon.y, polygon.depthForHero)
   }
   
-  constructor(scene: Scene & { heroManager: HeroManager }, x: number, y: number, map: ButtleMap) {
+  constructor(scene: HeroScene, x: number, y: number, map: ButtleMap) {
     this._scene = scene
     this._map = map
 
-    this._heroManager = scene.heroManager
+    // this._heroManager = scene.heroManager
 
     this.x = x
     this.y = y

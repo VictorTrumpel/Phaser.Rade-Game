@@ -1,4 +1,4 @@
-import { ButtleMap } from '../manage/BattlePolygon'
+import { ButtleMap } from '../manage/HeroButtleGround'
 
 const safariMap: ButtleMap = [
   [0, 0, 0, 0, 0],

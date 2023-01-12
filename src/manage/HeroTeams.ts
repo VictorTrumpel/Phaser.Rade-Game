@@ -1,6 +1,6 @@
 import { Utils, Scene } from 'phaser'
 import { Hero } from '../prefabs/Hero'
-import { ButtlePolygon } from './BattlePolygon'
+import { HeroButtleGround } from './HeroButtleGround'
 import { CharacterItem } from '../characterConfigs/allCharacters'
 import { HeroCasts } from '../characterConfigs/IHeroConfig'
 import { ChooseHeroScenePayload } from '../scenes/ChooseHeroScene'
@@ -13,7 +13,7 @@ export class HeroTeams {
 
   constructor(
     private scene: Scene, 
-    private buttleField: ButtlePolygon
+    private buttleField: HeroButtleGround
   ) {
     this.scene = scene
     this.buttleField = buttleField

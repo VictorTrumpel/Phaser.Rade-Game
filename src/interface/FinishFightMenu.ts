@@ -1,7 +1,6 @@
-import { HeroManager } from '../manage/HeroManager';
-import { Scene } from 'phaser'
 import { BaseMenu } from './BaseMenu'
-import { GoodsManager } from '../manage/GoodsManager';
+import { GoodsManager } from '../manage/GoodsManager'
+import { IHeroScene } from '../scenes/IHeroScene'
 import goldIcon from '../assets/icons/gold-bars-icon.png'
 import expIcon from '../assets/icons/exp-icon.png'
 
@@ -12,8 +11,7 @@ type Loot = {
 
 export class FinishFightMenu extends BaseMenu {
 
-  private scene: Scene
-  private heroManager: HeroManager
+  private scene: IHeroScene
   private isWin: boolean = false
   private canvas: HTMLCanvasElement | null
   private goodsManager = new GoodsManager()
@@ -28,11 +26,10 @@ export class FinishFightMenu extends BaseMenu {
     this.scene.scene.start('ChooseHeroScene')
   }
 
-  constructor(scene: Scene & { heroManager: HeroManager }) {
+  constructor(scene: IHeroScene) {
     super()
     this.scene = scene
-    this.heroManager = scene.heroManager
-    this.isWin = this.heroManager.getHeroesState().myHeroesIsAlive
+    this.isWin = scene.heroFightToggler.getHeroesState().myHeroesIsAlive
     this.lootForButtle = this.isWin 
       ? { gold: 200, exp: 200 }
       : { gold: 0, exp: 0 }

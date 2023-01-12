@@ -8,7 +8,7 @@ type AnimationKeys = {
   idle: string
 }
 
-export class HeroAnimationManager extends Animations.AnimationState {
+export class HeroAnimationPlayer extends Animations.AnimationState {
   private _animationResolver: () => void | null
   private hero: Hero
 

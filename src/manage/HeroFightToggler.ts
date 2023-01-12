@@ -4,7 +4,7 @@ import { Hero } from '../prefabs/Hero'
 
 export class HeroFightToggler {
 
-  private activeHeroIndex = 0
+  private _activeHeroIndex = 0
   private isProcessing = false
 
   private _onFightOver = () => null
@@ -21,8 +21,8 @@ export class HeroFightToggler {
     })
 
     const firstTeamHeroIdx = this.heroes.findIndex(hero => !hero.autoPlay)
-    this.activeHeroIndex = firstTeamHeroIdx
-    this.heroes[this.activeHeroIndex].halo.show()
+    this._activeHeroIndex = firstTeamHeroIdx
+    this.heroes[this._activeHeroIndex].halo.show()
   }
 
   set onFightOver(callback: () => any) {
@@ -41,8 +41,12 @@ export class HeroFightToggler {
     return this.heroTeams.heroes
   }
 
+  get activeHeroIndex() {
+    return this._activeHeroIndex
+  }
+
   async startRound(targetHero: Hero) {
-    const isCurrentHeroAutoPlay = this.heroes[this.activeHeroIndex].autoPlay
+    const isCurrentHeroAutoPlay = this.heroes[this._activeHeroIndex].autoPlay
     const isTeamMate = !!this.teamHeroes.find(hero => hero === targetHero)
 
     if (
@@ -60,6 +64,12 @@ export class HeroFightToggler {
     this.isProcessing = false
   }
 
+  getHeroesState() {
+    const myHeroesIsAlive = this.teamHeroes.some(hero => hero.isAlive())
+    const enemyHeroesIsAlive = this.enemyHeroes.some(hero => hero.isAlive())
+    return { myHeroesIsAlive, enemyHeroesIsAlive } 
+  }
+
   private checkWhoWin() {
     const allTeamDie = this.teamHeroes.every(hero => !hero.isAlive())
     const allEnemyDie = this.enemyHeroes.every(hero => !hero.isAlive())
@@ -69,22 +79,22 @@ export class HeroFightToggler {
   }
 
   private async attackHero(targetHero: Hero) {
-    const activeHero = this.heroes[this.activeHeroIndex]
+    const activeHero = this.heroes[this._activeHeroIndex]
     const attackValue = activeHero.attackValue
     await Promise.all([activeHero.attack(), targetHero.hurt(attackValue)])
     this.checkWhoWin()
   }
 
   private async turnHero() {
-    const currentHero = this.heroes[this.activeHeroIndex]
+    const currentHero = this.heroes[this._activeHeroIndex]
 
     currentHero.halo.hide()
 
-    this.activeHeroIndex < this.heroes.length - 1
-      ? this.activeHeroIndex += 1
-      : this.activeHeroIndex = 0
+    this._activeHeroIndex < this.heroes.length - 1
+      ? this._activeHeroIndex += 1
+      : this._activeHeroIndex = 0
 
-    const activeHero = this.heroes[this.activeHeroIndex]
+    const activeHero = this.heroes[this._activeHeroIndex]
     
     if (!activeHero?.isAlive()) {
       this.turnHero()

@@ -2,7 +2,7 @@ import { HeroCasts } from './../characterConfigs/IHeroConfig'
 import { Halo } from './Halo'
 import { HealthBar } from './HealthBar'
 import { GameObjects, Scene, Textures } from 'phaser'
-import { HeroAnimationManager } from '../manage/HeroAnimationManager'
+import { HeroAnimationPlayer } from '../manage/HeroAnimationPlayer'
 import { HitArea } from './HitArea'
 import { IInteractiveObject } from '../model/IInteractiveObject'
 import hitAreas from '../constants/hitAreas'
@@ -32,7 +32,7 @@ export class Hero extends GameObjects.Sprite implements IInteractiveObject {
 
   readonly name: HeroCasts
 
-  anims: HeroAnimationManager
+  anims: HeroAnimationPlayer
 
   healthBar: HealthBar
   halo: Halo
@@ -101,7 +101,7 @@ export class Hero extends GameObjects.Sprite implements IInteractiveObject {
 
     this.scene.add.existing(this)    
 
-    this.anims = new HeroAnimationManager(this)
+    this.anims = new HeroAnimationPlayer(this)
     this.anims.playIdle()
   }
 
@@ -128,9 +128,10 @@ export class Hero extends GameObjects.Sprite implements IInteractiveObject {
     this.disableInteractive()
   } 
 
-  move(x: number, y: number) {
+  move(x: number, y: number, depth: number = 1) {
     this.x = x
     this.y = y
+    this.depth = depth
     this.halo.moveTo(x, y)
     this.healthBar.moveTo(x, this.heroTopY)
   }
