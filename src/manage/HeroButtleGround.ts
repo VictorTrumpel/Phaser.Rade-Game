@@ -59,6 +59,8 @@ export class HeroButtleGround {
     })
 
     // подсвечиваем квадрат вокруг найденного полигона
+    this._polyMatrix[row]?.[col]?.lightOn()
+
     this._polyMatrix[row - 1]?.[col]?.lightOn()
     this._polyMatrix[row - 1]?.[col + 1]?.lightOn()
     this._polyMatrix[row - 1]?.[col + 2]?.lightOn()
