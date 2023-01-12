@@ -32,14 +32,12 @@ export class HeroTeams {
   }
 
   createTeams(checkedHeroes: ChooseHeroScenePayload['checkedHeroes']) {
-    const TEMPORARY__checkedHeros = ['sven', 'ronin']
-
     // получаем 2 рандомные рассы 
     const enemyHeroCasts = Array.from({ length: 2 }, () => 
       getArrayRandom<CharacterItem>(allCharacters).caste
     )
     
-    const teamHeroCreds = TEMPORARY__checkedHeros.map((caste, idx) => {
+    const teamHeroCreds = checkedHeroes.map((caste, idx) => {
       const polyCords = this.buttleField.getPolyCord(0, idx * 2) || { x: 0, y: 0 }
       const depth = this.buttleField.getPolygon(0, idx * 2)?.depthForHero || 0
 
