@@ -9,6 +9,8 @@ export class HeroFightToggler {
 
   private _onFightOver = () => null
 
+  onToggleHero: (...args: any) => any = () => null
+
   private _onHeroClick = (hero: Hero) => {
     this.startRound(hero)
   }
@@ -21,8 +23,8 @@ export class HeroFightToggler {
     })
 
     const firstTeamHeroIdx = this.heroes.findIndex(hero => !hero.autoPlay)
-    this._activeHeroIndex = firstTeamHeroIdx
-    this.heroes[this._activeHeroIndex].halo.show()
+    this.activeHeroIndex = firstTeamHeroIdx
+    this.heroes[this.activeHeroIndex].halo.show()
   }
 
   set onFightOver(callback: () => any) {
@@ -45,8 +47,13 @@ export class HeroFightToggler {
     return this._activeHeroIndex
   }
 
+  private set activeHeroIndex(idx: number) {
+    this._activeHeroIndex = idx
+    this.onToggleHero()
+  }
+
   async startRound(targetHero: Hero) {
-    const isCurrentHeroAutoPlay = this.heroes[this._activeHeroIndex].autoPlay
+    const isCurrentHeroAutoPlay = this.heroes[this.activeHeroIndex].autoPlay
     const isTeamMate = !!this.teamHeroes.find(hero => hero === targetHero)
 
     if (
@@ -79,22 +86,22 @@ export class HeroFightToggler {
   }
 
   private async attackHero(targetHero: Hero) {
-    const activeHero = this.heroes[this._activeHeroIndex]
+    const activeHero = this.heroes[this.activeHeroIndex]
     const attackValue = activeHero.attackValue
     await Promise.all([activeHero.attack(), targetHero.hurt(attackValue)])
     this.checkWhoWin()
   }
 
   private async turnHero() {
-    const currentHero = this.heroes[this._activeHeroIndex]
+    const currentHero = this.heroes[this.activeHeroIndex]
 
     currentHero.halo.hide()
 
-    this._activeHeroIndex < this.heroes.length - 1
-      ? this._activeHeroIndex += 1
-      : this._activeHeroIndex = 0
+    this.activeHeroIndex < this.heroes.length - 1
+      ? this.activeHeroIndex += 1
+      : this.activeHeroIndex = 0
 
-    const activeHero = this.heroes[this._activeHeroIndex]
+    const activeHero = this.heroes[this.activeHeroIndex]
     
     if (!activeHero?.isAlive()) {
       this.turnHero()

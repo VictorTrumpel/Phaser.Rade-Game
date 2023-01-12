@@ -22,6 +22,8 @@ export class HeroButtleGround {
   private _polyMatrix: PolyMatrix = []
 
   private _onPolygonClick = (polygon: Polygon) => {
+    if (!polygon.isLight)
+      return
     const allHeroes = this._scene.heroTeams.heroes
     const activeHeroIdx = this._scene.heroFightToggler.activeHeroIndex
     const heroNeedToMove = allHeroes[activeHeroIdx]
@@ -32,8 +34,6 @@ export class HeroButtleGround {
     this._scene = scene
     this._map = map
 
-    // this._heroManager = scene.heroManager
-
     this.x = x
     this.y = y
 
@@ -42,6 +42,33 @@ export class HeroButtleGround {
 
   init() {
     this.createButtleGround()
+  }
+
+  highlightPolygons(polyX: number, polyY: number) {
+    let row = 0
+    let col = 0
+    // обесцвечиваем все полигоны c прошлого хода и находим в матрице полигон, по координатам
+    this._polyMatrix.forEach((polyRow, rowIdx) => {
+      polyRow.forEach((poly, colIdx) => {
+        poly?.lightOff()
+        if (poly?.x === polyX && poly?.y === polyY) {
+          row = rowIdx
+          col = colIdx
+        }
+      })
+    })
+
+    // подсвечиваем квадрат вокруг найденного полигона
+    this._polyMatrix[row - 1]?.[col]?.lightOn()
+    this._polyMatrix[row - 1]?.[col + 1]?.lightOn()
+    this._polyMatrix[row - 1]?.[col + 2]?.lightOn()
+
+    this._polyMatrix[row + 1]?.[col]?.lightOn()
+    this._polyMatrix[row + 1]?.[col - 1]?.lightOn()
+    this._polyMatrix[row + 1]?.[col - 2]?.lightOn()
+
+    this._polyMatrix[row]?.[col - 1]?.lightOn()
+    this._polyMatrix[row]?.[col + 1]?.lightOn()    
   }
 
   createButtleGround() {

@@ -24,6 +24,14 @@ export class GameScene extends Scene implements IHeroScene {
     finishFightScene.render() 
   }
 
+  onToggleHero = () => {
+    const activeHeroIdx = this.heroFightToggler.activeHeroIndex
+    const hero = this.heroTeams.heroes[activeHeroIdx]
+    const posX = hero.x
+    const posY = hero.y
+    this.buttleField.highlightPolygons(posX, posY)
+  }
+
   constructor() {
     super('GameScene')
   }
@@ -43,6 +51,8 @@ export class GameScene extends Scene implements IHeroScene {
 
     this.heroFightToggler = new HeroFightToggler(this.heroTeams)
 
+    this.onToggleHero()
+
     this.initEvents()
   }
 
@@ -59,5 +69,6 @@ export class GameScene extends Scene implements IHeroScene {
   initEvents() {
     this.input.on('gameobjectdown', this.onInteractiveClick)
     this.heroFightToggler.onFightOver = this.onFightOver
+    this.heroFightToggler.onToggleHero = this.onToggleHero
   }
 }

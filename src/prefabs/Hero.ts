@@ -110,17 +110,20 @@ export class Hero extends GameObjects.Sprite implements IInteractiveObject {
   }
 
   async hurt(damage: number) {
-    if (!this.isAlive()) return 
+    if (!this.isAlive()) 
+      return 
     
     this.healthValue -= damage
 
     const kProgressBar = this.healthValue / this.maxHealth
 
-    if (this.healthBar) this.healthBar.change(kProgressBar)
+    if (this.healthBar) 
+      this.healthBar.change(kProgressBar)
 
     await this.playInjured()  
     
-    if (this.healthValue <= 0) this.kill()
+    if (this.healthValue <= 0) 
+      this.kill()
   }
 
   kill() {

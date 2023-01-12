@@ -7,6 +7,8 @@ export class Polygon extends GameObjects.Ellipse implements IInteractiveObject {
 
   depthForHero = 1
 
+  isLight = false
+
   onClick = () => null
 
   constructor(scene: Scene, x: number, y: number, depth: number) {
@@ -28,5 +30,15 @@ export class Polygon extends GameObjects.Ellipse implements IInteractiveObject {
     this.depthForHero = depth
 
     this.scene.add.existing(this)
+  }
+
+  lightOn() {
+    this.isLight = true
+    this.setFillStyle(0xc1d3e0, 1)
+  }
+
+  lightOff() {
+    this.isLight = false
+    this.setFillStyle(0xc1d3e0, 0)
   }
 }
