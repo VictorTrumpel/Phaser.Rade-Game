@@ -18,5 +18,5 @@ const config: Phaser.Types.Core.GameConfig = {
   ],
 }
 
-new GoodsManager()
+new GoodsManager({ gold: 500, experience: 500 })
 const game = new Phaser.Game(config)

@@ -10,8 +10,75 @@ canvas {
   width: 100%;
 }
 
+html {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/assets/background/fon-table.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 body {
   position: relative;
+  
+  min-width: 1000px;
+  max-width: 1000px;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow: 
+    0px 100px 1000px #c0bebe, 
+    0px -100px 1000px #c0bebe, 
+    -300px 0px 100px hsl(0, 2%, 75%, 0.5),
+    300px 0px 100px hsl(0, 2%, 75%, 0.5)
+  ;
+}
+
+.blur-left-border {
+  position: absolute;
+  left: -5px;
+  top: 0;
+  height: 100%;
+  width: 10px;
+  background: #c0bebe;
+  filter: blur(7px);
+}
+
+.blur-right-border {
+  position: absolute;
+  right: -5px;
+  top: 0;
+  height: 100%;
+  width: 10px;
+  background: #c0bebe;
+  filter: blur(7px);
+}
+
+.blur-top-border {
+  position: absolute;
+  left: 0;
+  top: -5px;
+  height: 10px;
+  width: 100%;
+  background: #c0bebe;
+  filter: blur(7px);
+}
+
+.blur-bottom-border {
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 10px;
+  width: 100%;
+  background: #c0bebe;
+  filter: blur(7px);
+}
+
+canvas {
+  min-width: 1000px;
+  max-width: 1000px;
   width: 1000px;
 }
 
